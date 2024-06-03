@@ -71,10 +71,16 @@ def register_post():
         name=request.form["userid"]
     )
     user.set_password(request.form["password"])
-
+    print("登録")
     # オブジェクトをDBに追加
     db.session.add(user)
     # DBへの変更を保存
     db.session.commit()
+    return redirect(url_for('index_get'))
 
 
+@login_module.route("/users",methods=['GET'])
+def users_get():
+    # ユーザオブジェクトを全て取得
+    users = tables.User.query.all()
+    return render_template('users_get.html', users=users)

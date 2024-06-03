@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="jp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザ一覧</title>
+</head>
+
+<body>
+
+
+    <h1>検索結果</h1>
+    <table>
+        <tr>
+            <th>userid</th>
+            <th>username</th>
+            <th>password</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td><a href="/users/{{ user.id }}">
+                    <p>{{ user.id }}</p>
+                </a></td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.password }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>

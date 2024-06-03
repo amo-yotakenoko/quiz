@@ -18,7 +18,9 @@ DB_PASS = "docker"
 DB_HOST = "db"
 DB_NAME = "flask_app"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+mysqldb://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}?charset=utf8"
+# app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+mysqldb://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}?charset=utf8"
+
+app.config['SQLALCHEMY_DATABASE_URI'] ="sqlite:///blog.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # セッション情報を暗号化するための秘密鍵（本番環境ではランダムかつ厳重に扱う）
