@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, Response, redirect, url_for, flash
 from flask import Blueprint
 from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user
-import tables 
+import models 
 from database import db
 
 
@@ -32,7 +32,7 @@ def login_get():
 def login_post():
     # メールアドレスをもとにデータベースへ問い合わせる
     # 結果がゼロの時はNoneを返す
-    user = tables.User.query.filter_by(mail=request.form["userid"]).one_or_none()
+    user = models.User.query.filter_by(mail=request.form["userid"]).one_or_none()
     
     # ユーザが存在しない or パスワードが間違っている時
     if user is None or not user.check_password(request.form["password"]):
@@ -67,7 +67,7 @@ def register_get():
 # メールアドレスとパスワードを受け取り処理を行う
 @login_module.route('/register', methods=['POST'])
 def register_post():
-    user = tables.User(
+    user = models.User(
         name=request.form["userid"]
     )
     user.set_password(request.form["password"])
@@ -82,5 +82,5 @@ def register_post():
 @login_module.route("/users",methods=['GET'])
 def users_get():
     # ユーザオブジェクトを全て取得
-    users = tables.User.query.all()
+    users = models.User.query.all()
     return render_template('users_get.html', users=users)
