@@ -45,6 +45,18 @@
         .login-container input[type="submit"]:hover {
             background-color: #218838;
         }
+        .login-container .create-account {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .login-container .create-account a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .login-container .create-account a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -57,6 +69,9 @@
             <input type="password" id="password" name="password" required>
             <input type="submit" value="ログイン">
         </form>
+        <div class="create-account">
+            <a href="signup.html">アカウント作成</a>
+        </div>
     </div>
 </body>
 </html>
