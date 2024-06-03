@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request, Response, redirect, url_for, flash
 from flask import Blueprint
 from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user
-from db import *
+import tables 
+from database import db
+
+
+# from main import login
+
+
 
 
 login_module = Blueprint("login", __name__)
@@ -18,7 +24,7 @@ def login_get():
     return redirect(url_for('index_get'))
   
   # loginページのテンプレートを返す
-  return render_template('login.html')
+  return render_template('LoginPage.html')
 
 
 # メールアドレスとパスワードを受け取り処理を行う
@@ -26,7 +32,7 @@ def login_get():
 def login_post():
     # メールアドレスをもとにデータベースへ問い合わせる
     # 結果がゼロの時はNoneを返す
-    user = User.query.filter_by(mail=request.form["userid"]).one_or_none()
+    user = tables.User.query.filter_by(mail=request.form["userid"]).one_or_none()
     
     # ユーザが存在しない or パスワードが間違っている時
     if user is None or not user.check_password(request.form["password"]):
@@ -39,3 +45,36 @@ def login_post():
     login_user(user)
     # トップページへリダイレクト
     return redirect(url_for('index_get'))
+
+
+
+
+
+
+
+# ログインページの実装
+@login_module.route('/register', methods=['GET'])
+def register_get():
+  # 現在のユーザーがログイン済みの場合
+  if current_user.is_authenticated:
+    # トップページに移動
+    return redirect(url_for('index_get'))
+  
+  # loginページのテンプレートを返す
+  return render_template('register.html')
+
+
+# メールアドレスとパスワードを受け取り処理を行う
+@login_module.route('/register', methods=['POST'])
+def register_post():
+    user = tables.User(
+        name=request.form["userid"]
+    )
+    user.set_password(request.form["password"])
+
+    # オブジェクトをDBに追加
+    db.session.add(user)
+    # DBへの変更を保存
+    db.session.commit()
+
+
