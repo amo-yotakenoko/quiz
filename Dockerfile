@@ -1,17 +1,14 @@
-FROM python:3.11-bullseye
-
-RUN pip install Flask Flask-SQLAlchemy Flask-Migrate flask-login mysqlclient
-RUN pip install Flask
-RUN pip install SQLAlchemy
-RUN pip install flask_sqlalchemy
-RUN pip install flask_migrate
-RUN pip install flask_login
-RUN pip install MySQLdb
-RUN pip install sqlalchemy
-RUN pip install mysqlclient
+FROM python:3.11-slim
 
 WORKDIR /app
-COPY * /app/
+
+RUN pip install --no-cache-dir \
+    Flask \
+    Flask-SQLAlchemy \
+    Flask-Migrate \
+    Flask-Login \
+    python-dotenv \
+    watchdog
 
 EXPOSE 8080
 
