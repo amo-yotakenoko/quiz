@@ -3,7 +3,7 @@ from flask import Blueprint
 from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user
 from flask_app import models
 from flask_app import db
-from flask_app import app
+# from flask_app import app
 
 # from main import login
 
@@ -13,7 +13,7 @@ from flask_app import app
 #     # ログイン機能からidを受け取った際、DBからそのユーザ情報を検索し、返す
 #     return models.User.query.get(int(id))
 
-login = LoginManager(app)
+# login = LoginManager(app)
 
 login_module = Blueprint("login", __name__)
 
