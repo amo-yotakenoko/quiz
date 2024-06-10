@@ -1,4 +1,4 @@
-from database import db
+from flask_app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # DBのテーブルを定義する
@@ -8,9 +8,9 @@ class User(db.Model):
 
     # 文字列型のnameカラム
     name = db.Column(db.String(128))
-    age = db.Column(db.Integer)
+    # age = db.Column(db.Integer)
 
-    mail = db.Column(db.String(128), unique=True)
+    # mail = db.Column(db.String(128), unique=True)
     password = db.Column(db.String(256))
 
     def set_password(self, password):

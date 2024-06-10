@@ -1,14 +1,19 @@
 from flask import Flask, render_template, request, Response, redirect, url_for, flash
 from flask import Blueprint
 from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user
-import models 
-from database import db
-
+from flask_app import models
+from flask_app import db
+from flask_app import app
 
 # from main import login
 
+# login = LoginManager(app)
+# @login.user_loader
+# def load_user(id):
+#     # ログイン機能からidを受け取った際、DBからそのユーザ情報を検索し、返す
+#     return models.User.query.get(int(id))
 
-
+login = LoginManager(app)
 
 login_module = Blueprint("login", __name__)
 
@@ -21,7 +26,7 @@ def login_get():
   # 現在のユーザーがログイン済みの場合
   if current_user.is_authenticated:
     # トップページに移動
-    return redirect(url_for('index_get'))
+    return redirect(url_for('index.index_get'))
   
   # loginページのテンプレートを返す
   return render_template('LoginPage.html')
@@ -44,7 +49,7 @@ def login_post():
     # ログインを承認
     login_user(user)
     # トップページへリダイレクト
-    return redirect(url_for('index_get'))
+    return redirect(url_for('index.index_get'))
 
 
 
@@ -58,7 +63,7 @@ def register_get():
   # 現在のユーザーがログイン済みの場合
   if current_user.is_authenticated:
     # トップページに移動
-    return redirect(url_for('index_get'))
+    return redirect(url_for('index.index_get'))
   
   # loginページのテンプレートを返す
   return render_template('SignupPage.html')
@@ -77,7 +82,7 @@ def register_post():
     db.session.add(user)
     # DBへの変更を保存
     db.session.commit()
-    return redirect(url_for('index_get'))
+    return redirect(url_for('index.index_get'))
 
 
 @login_module.route("/users",methods=['GET'])
