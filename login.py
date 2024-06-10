@@ -53,7 +53,7 @@ def login_post():
 
 
 # ログインページの実装
-@login_module.route('/register', methods=['GET'])
+@login_module.route('/signup', methods=['GET'])
 def register_get():
   # 現在のユーザーがログイン済みの場合
   if current_user.is_authenticated:
@@ -61,16 +61,17 @@ def register_get():
     return redirect(url_for('index_get'))
   
   # loginページのテンプレートを返す
-  return render_template('register.html')
+  return render_template('SignupPage.html')
 
 
 # メールアドレスとパスワードを受け取り処理を行う
-@login_module.route('/register', methods=['POST'])
+@login_module.route('/signup', methods=['POST'])
 def register_post():
     user = models.User(
-        name=request.form["userid"]
+        name=request.form["new_userid"]
     )
-    user.set_password(request.form["password"])
+   
+    user.set_password(request.form["new_password"])
     print("登録")
     # オブジェクトをDBに追加
     db.session.add(user)
