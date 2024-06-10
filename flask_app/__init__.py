@@ -18,16 +18,10 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.secret_key = "secret"
 
-
-    
-
-
-
-    migrate = Migrate(app)
-
     # DBの設定
     db.init_app(app)
     from flask_app import models
+    migrate = Migrate(app, db)
 
     # Blueprintの登録
     from flask_app.views.index import index_module
