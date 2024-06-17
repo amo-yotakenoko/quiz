@@ -38,8 +38,8 @@ def create_app():
     from flask_app.views.quastions_set import quastions_set_module
     app.register_blueprint(quastions_set_module)
 
-    from flask_app.views.quastions import quastions_module
-    app.register_blueprint(quastions_module)
+    from flask_app.views.create_question import create_question_module 
+    app.register_blueprint(create_question_module )
 
     return app
 

@@ -15,12 +15,13 @@
     <table>
         <tr>
             <!-- <th>questionsetid</th> -->
+            <th>questionsetid</th>
             <th>questionsetitle</th>
             <th>questionsetowner</th>
         </tr>
         {% for quastions_set in quastions_sets%}
         <tr>
-            <td><a href="/quastions/{{ quastions_set.questionsetid }}">
+            <td><a href="/quastions_set/{{ quastions_set.questionsetid }}">
                     <p>{{quastions_set.questionsetid }}</p>
                 </a></td>
             <td>{{ quastions_set.questionsetitle }}</td>

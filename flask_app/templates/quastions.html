@@ -14,17 +14,20 @@
     </form>
     <table>
         <tr>
-            <!-- <th>questionsetid</th> -->
-            <th>questionsetitle</th>
-            <th>questionsetowner</th>
+            <th>questionid</th>
+            <th>questionsetid </th>
+            <th>questiontext</th>
+            <th>正答率</th>
         </tr>
         {% for quastion in quastions%}
         <tr>
-            <td><a href="/quastion/{{ quastion.questionsetid }}">
-                    <p>{{quastion.questionsetid }}</p>
+            <td><a href="/quastion/{{ quastion.questionid }}">
+                    <p>{{quastion.questionid }}</p>
                 </a></td>
-            <td>{{ quastion.questionsetitle }}</td>
-            <td>{{ quastion.questionsetowner }}</td>
+            <td>{{quastion.questionsetid}}</td>
+            <td>{{quastion.questiontext}}</td>
+            <td>{{ quastion.correctcount }}/{{ quastion.count }}</td>
+
         </tr>
         {% endfor %}
     </table>
