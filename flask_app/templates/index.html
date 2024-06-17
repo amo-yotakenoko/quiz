@@ -9,10 +9,10 @@
 
 <body>
 
+    あなたのユーザネームは{{ current_user.username }}です。
     {% if current_user.is_authenticated %}
     <h2>ログイン中</h2>
 
-    あなたのユーザネームは{{ current_user.username }}です。
     {% else %}
     ログインされていません<br>
     <a href="login">ログイン</a><br>

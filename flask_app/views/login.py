@@ -29,7 +29,7 @@ def login_get():
     return redirect(url_for('index.index_get'))
   
   # loginページのテンプレートを返す
-  return render_template('LoginPage.html')
+  return render_template('index.html')
 
 
 # メールアドレスとパスワードを受け取り処理を行う
@@ -66,7 +66,7 @@ def register_get():
     return redirect(url_for('index.index_get'))
   
   # loginページのテンプレートを返す
-  return render_template('SignupPage.html')
+  return render_template('signup.html')
 
 
 # メールアドレスとパスワードを受け取り処理を行う

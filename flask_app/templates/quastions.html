@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="jp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>問題一覧</title>
+</head>
+
+<body>
+
+    <form method="POST">
+        <input type="submit" value="問題を追加">
+    </form>
+    <table>
+        <tr>
+            <!-- <th>questionsetid</th> -->
+            <th>questionsetitle</th>
+            <th>questionsetowner</th>
+        </tr>
+        {% for quastion in quastions%}
+        <tr>
+            <td><a href="/quastion/{{ quastion.questionsetid }}">
+                    <p>{{quastion.questionsetid }}</p>
+                </a></td>
+            <td>{{ quastion.questionsetitle }}</td>
+            <td>{{ quastion.questionsetowner }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>
