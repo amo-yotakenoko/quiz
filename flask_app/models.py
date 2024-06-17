@@ -36,7 +36,7 @@ class Question(db.Model):
 
 	__tablename__ = 'Question'
     # 数値型の問題IDカラム
-	questionid = db.Column(db.Integer, primary_key=True)
+	questionid = db.Column(db.Integer, primary_key=True,autoincrement=True)
 	# 文字列型の問題セットIDカラム
 	questionsetid = db.Column(db.Integer)
 	# 文字列型の問題文カラム
@@ -54,7 +54,7 @@ class GameLog(db.Model):
 
 	__tablename__ = 'GameLog'
     # 数値型のゲームログのIDカラム
-	gamelogid = db.Column(db.Integer, primary_key=True)
+	gamelogid = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	# 数値型の参加したユーザのIDカラム
 	participatingiserid = db.Column(db.Integer)
 	# 数値型のゲーム番号カラム
