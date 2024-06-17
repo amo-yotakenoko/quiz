@@ -35,10 +35,10 @@ class Questionset(db.Model):
 class Question(db.Model):
 
 	__tablename__ = 'Question'
+    # 数値型の問題IDカラム
+	questionid = db.Column(db.Integer, primary_key=True)
 	# 文字列型の問題セットIDカラム
 	questionsetid = db.Column(db.Integer)
-	# 数値型の問題IDカラム
-	questionid = db.Column(db.Integer, primary_key=True)
 	# 文字列型の問題文カラム
 	questiontext = db.Column(db.String(128))
 	# 文字列型の答えカラム
@@ -53,6 +53,8 @@ class Question(db.Model):
 class GameLog(db.Model):
 
 	__tablename__ = 'GameLog'
+    # 数値型のゲームログのIDカラム
+	gamelogid = db.Column(db.Integer, primary_key=True)
 	# 数値型の参加したユーザのIDカラム
 	participatingiserid = db.Column(db.Integer)
 	# 数値型のゲーム番号カラム
@@ -63,8 +65,5 @@ class GameLog(db.Model):
 	questionasked = db.Column(db.Integer)
 	# 文字列型のどのユーザがどう回答したかカラム
 	howtoanswer = db.Column(db.String(128))
-	# 数値型のゲームログのIDカラム
-	gamelogid = db.Column(db.Integer, primary_key=True)
-
 
 
