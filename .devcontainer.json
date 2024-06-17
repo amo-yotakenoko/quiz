@@ -2,6 +2,6 @@
     "name": "quiz",
     "dockerComposeFile": ["./compose.yaml"],
     "service": "app",
-    "shutdownAction": "none",
+    "shutdownAction": "stopCompose",
     "workspaceFolder": "/app"
 }

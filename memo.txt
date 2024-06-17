@@ -1,2 +1,4 @@
 python -m flask run
+
+python -m flask --app flask_app db migrate -m "Initial migration"
 python -m flask --app flask_app db upgrade 

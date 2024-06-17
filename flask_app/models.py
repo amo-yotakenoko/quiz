@@ -7,7 +7,7 @@ class Account(UserMixin, db.Model):
     # テーブル名を指定
     __tablename__ = 'Account'
     # 数値型のidカラム
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(128), primary_key=True)
     # 文字列型のnameカラム
     name = db.Column(db.String(128))
 
