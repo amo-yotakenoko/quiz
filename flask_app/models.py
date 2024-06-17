@@ -26,7 +26,7 @@ class Questionset(db.Model):
 
 	__tablename__ = 'Questionset'
 	# 数値型の問題セットIDカラム
-	questionsetid = db.Column(db.Integer, primary_key=True)
+	questionsetid = db.Column(db.Integer, primary_key=True,autoincrement=True)
 	# 文字列型の問題セットタイトルカラム
 	questionsetitle = db.Column(db.String(128))
 	# 数値型の問題セット所有者カラム
@@ -43,7 +43,7 @@ class Question(db.Model):
 	questiontext = db.Column(db.String(128))
 	# 文字列型の答えカラム
 	answer = db.Column(db.String(128))
-	# 数値型の問題の形式カラム
+	# 数値型の問題の形式カラム(0:文字列問題,1:数値問題)
 	questionformat = db.Column(db.Integer)
 	# 数値型の問題が解かれた回数カラム
 	count = db.Column(db.Integer)

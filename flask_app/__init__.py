@@ -32,9 +32,14 @@ def create_app():
 
     # Blueprintの登録
     from flask_app.views.index import index_module
-    from flask_app.views.login import login_module
     app.register_blueprint(index_module)
+    from flask_app.views.login import login_module
     app.register_blueprint(login_module)
+    from flask_app.views.quastions_set import quastions_set_module
+    app.register_blueprint(quastions_set_module)
+
+    from flask_app.views.quastions import quastions_module
+    app.register_blueprint(quastions_module)
 
     return app
 
