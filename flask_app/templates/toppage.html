@@ -9,11 +9,8 @@
 <body>
     <div class="container">
         <h1>クイズテーマ選択</h1>
-        <form action="create_question.html" method="get">
-            <label for="theme">テーマを選択してください:</label>
-            <input type="text" id="theme" name="theme" required>
-            <input type="submit" value="テーマ決定">
-        </form>
+        <ul id="theme-list"></ul>
+        <button onclick="location.href='create_question.html'">新しいテーマを作成</button>
     </div>
     <script src="scripts.js"></script>
 </body>

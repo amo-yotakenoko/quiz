@@ -9,8 +9,9 @@
 <body>
     <div class="container">
         <h1>問題作成</h1>
-        <form action="answer_question.html" method="post">
-            <input type="hidden" id="theme" name="theme" value="">
+        <form id="create-question-form">
+            <label for="theme">テーマを入力してください:</label>
+            <input type="text" id="theme" name="theme" required>
             <label for="question">問題を入力してください:</label>
             <textarea id="question" name="question" required></textarea>
             <label for="answer">正解を入力してください:</label>
