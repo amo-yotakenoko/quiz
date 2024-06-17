@@ -37,7 +37,7 @@ def login_get():
 def login_post():
     # メールアドレスをもとにデータベースへ問い合わせる
     # 結果がゼロの時はNoneを返す
-    user = models.User.query.filter_by(mail=request.form["userid"]).one_or_none()
+    user = models.Account.query.filter_by(name=request.form["userid"]).one_or_none()
     
     # ユーザが存在しない or パスワードが間違っている時
     if user is None or not user.check_password(request.form["password"]):
@@ -72,7 +72,7 @@ def register_get():
 # メールアドレスとパスワードを受け取り処理を行う
 @login_module.route('/signup', methods=['POST'])
 def register_post():
-    user = models.User(
+    user = models.Account(
         name=request.form["new_userid"]
     )
    
@@ -88,5 +88,5 @@ def register_post():
 @login_module.route("/users",methods=['GET'])
 def users_get():
     # ユーザオブジェクトを全て取得
-    users = models.User.query.all()
+    users = models.Account.query.all()
     return render_template('users_get.html', users=users)

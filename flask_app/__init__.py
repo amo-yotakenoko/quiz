@@ -23,6 +23,13 @@ def create_app():
     from flask_app import models
     migrate = Migrate(app, db)
 
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return models.Account.get(user_id)
+
     # Blueprintの登録
     from flask_app.views.index import index_module
     from flask_app.views.login import login_module
