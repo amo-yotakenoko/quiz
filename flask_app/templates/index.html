@@ -9,6 +9,13 @@
 
 <body>
 
-    123456789
-    トップページ!!!!
+    {% if current_user.is_authenticated %}
+    <h2>ログイン中</h2>
+
+    あなたのユーザネームは{{ current_user.username }}です。
+    {% else %}
+    ログインされていません<br>
+    <a href="login">ログイン</a><br>
+    <a href="signup">サインアップ</a><br>
+    {% endif %}
 </body>
