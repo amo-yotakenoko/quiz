@@ -19,14 +19,14 @@
             <th>questiontext</th>
             <th>正答率</th>
         </tr>
-        {% for quastion in quastions%}
+        {% for question in questions%}
         <tr>
-            <td><a href="/quastion/{{ quastion.questionid }}">
-                    <p>{{quastion.questionid }}</p>
+            <td><a href="/question/{{ question.questionid }}">
+                    <p>{{question.questionid }}</p>
                 </a></td>
-            <td>{{quastion.questionsetid}}</td>
-            <td>{{quastion.questiontext}}</td>
-            <td>{{ quastion.correctcount }}/{{ quastion.count }}</td>
+            <td>{{question.questionsetid}}</td>
+            <td>{{question.questiontext}}</td>
+            <td>{{ question.correctcount }}/{{ question.count }}</td>
 
         </tr>
         {% endfor %}

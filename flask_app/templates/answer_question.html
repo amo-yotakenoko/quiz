@@ -20,11 +20,11 @@
         <form id="answer-form">
             <div id="questions-container">
 
-                {% for quastion in quastions%}
+                {% for question in questions%}
 
 
-                {{quastion.questionsetid}}-{{quastion.questionid }}</br>
-                {{quastion.questiontext}}
+                {{question.questionsetid}}-{{question.questionid }}</br>
+                {{question.questiontext}}
                 <br>
                 {% endfor %}
 

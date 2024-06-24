@@ -19,14 +19,14 @@
                 <th>questionsetitle</th>
                 <th>questionsetowner</th>
             </tr>
-            {% for quastions_set in quastions_sets%}
+            {% for questions_set in questions_sets%}
             <tr>
-                <td><input type="checkbox" name="switch" value="{{ quastions_set.questionsetid }}" /></td>
+                <td><input type="checkbox" name="switch" value="{{ questions_set.questionsetid }}" /></td>
                 <td>
-                    <p>{{quastions_set.questionsetid }}</p>
+                    <p>{{questions_set.questionsetid }}</p>
                 </td>
-                <td>{{ quastions_set.questionsetitle }}</td>
-                <td>{{ quastions_set.questionsetowner }}</td>
+                <td>{{ questions_set.questionsetitle }}</td>
+                <td>{{ questions_set.questionsetowner }}</td>
             </tr>
             {% endfor %}
         </table>

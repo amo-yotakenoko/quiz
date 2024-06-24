@@ -35,15 +35,15 @@ def create_app():
     app.register_blueprint(index_module)
     from flask_app.views.login import login_module
     app.register_blueprint(login_module)
-    from flask_app.views.quastions_set import quastions_set_module
-    app.register_blueprint(quastions_set_module)
+    from flask_app.views.questions_set import questions_set_module
+    app.register_blueprint(questions_set_module)
 
     from flask_app.views.create_question import create_question_module 
     app.register_blueprint(create_question_module )
-    from flask_app.views.quastions_set_select import quastions_set_select_module
-    app.register_blueprint(quastions_set_select_module)
-    from flask_app.views.answer_quastion import answer_quastion_module
-    app.register_blueprint(answer_quastion_module)
+    from flask_app.views.questions_set_select import questions_set_select_module
+    app.register_blueprint(questions_set_select_module)
+    from flask_app.views.answer_question import answer_question_module
+    app.register_blueprint(answer_question_module)
 
     return app
 
