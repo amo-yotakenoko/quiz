@@ -42,6 +42,8 @@ def create_app():
     app.register_blueprint(create_question_module )
     from flask_app.views.quastions_set_select import quastions_set_select_module
     app.register_blueprint(quastions_set_select_module)
+    from flask_app.views.answer_quastion import answer_quastion_module
+    app.register_blueprint(answer_quastion_module)
 
     return app
 

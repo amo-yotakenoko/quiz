@@ -19,5 +19,12 @@ def quastions_set_select_get():
 @quastions_set_select_module.route("/quastions_set_select",methods=['POST'])
 def quastions_set_select_post():
     switchs = request.form.getlist("switch")
-    # print(switchs,flush=True)
-    return f"quastion{switchs}"
+    print(switchs,flush=True)
+    quastions=[]
+    for quastions_set_id in switchs:
+        for quastion in models.Question.query.filter(models.Question.questionsetid == quastions_set_id):
+            quastions.append(quastion)
+        
+
+
+    return render_template('answer_question.html',quastions=quastions)

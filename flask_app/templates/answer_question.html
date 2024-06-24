@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>問題に回答</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <nav>
@@ -16,7 +18,17 @@
         </nav>
         <h1 id="quiz-theme">テーマ:</h1>
         <form id="answer-form">
-            <div id="questions-container"></div>
+            <div id="questions-container">
+
+                {% for quastion in quastions%}
+
+
+                {{quastion.questionsetid}}-{{quastion.questionid }}</br>
+                {{quastion.questiontext}}
+                <br>
+                {% endfor %}
+
+            </div>
             <input type="submit" value="回答する">
         </form>
         <div id="result"></div>
@@ -24,4 +36,5 @@
     </div>
     <script src="scripts.js"></script>
 </body>
+
 </html>
