@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>問題作成</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>問題作成</h1>
-        <form id="create-question-form">
+        <form action="{{ url_for('create_question.create_question_post', id=id) }}" method="POST"
+            id="create-question-form">
             <label for="theme">テーマを入力してください:</label>
             <input type="text" id="theme" name="theme" required>
             <label for="question">問題を入力してください:</label>
@@ -21,4 +24,5 @@
     </div>
     <script src="scripts.js"></script>
 </body>
+
 </html>

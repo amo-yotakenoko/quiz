@@ -9,8 +9,15 @@ create_question_module = Blueprint("create_question", __name__)
 
 @create_question_module.route("/quastion/<id>",methods=['GET'])
 def create_question_get(id):
-    return render_template('create_question.html')
+    return render_template('create_question.html', id=id)
 
 @create_question_module.route("/quastion/<id>",methods=['POST'])
 def create_question_post(id):
-    return render_template('create_question.html')
+    question = models.Question.query.filter_by(questionid=id).one_or_none()
+    if question == None:
+        return Response(response="<h1>404 Not found<h1/>create_question_module", status=404)
+    question.questiontext=request.form["question"]
+    db.session.add(question)
+    db.session.commit()
+        
+    return redirect(url_for('quastions_set.quastions_get', id=question.questionsetid))
