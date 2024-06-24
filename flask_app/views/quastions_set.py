@@ -10,6 +10,7 @@ quastions_set_module = Blueprint("quastions_set", __name__)
 
 @quastions_set_module.route("/quastions_set",methods=['GET'])
 def quastions_set_get():
+    #TODO:所有者でフィルタする
     quastions_sets = models.Questionset.query.all()
     return render_template('quastions_set.html',quastions_sets= quastions_sets)
 

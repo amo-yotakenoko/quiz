@@ -3,6 +3,7 @@ from flask import Blueprint
 from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user
 from flask_app import models
 from flask_app import db
+# import uuid
 # from flask_app import app
 
 # from main import login
@@ -29,7 +30,7 @@ def login_get():
     return redirect(url_for('index.index_get'))
   
   # loginページのテンプレートを返す
-  return render_template('index.html')
+  return render_template('login.html')
 
 
 # メールアドレスとパスワードを受け取り処理を行う
@@ -66,14 +67,15 @@ def register_get():
     return redirect(url_for('index.index_get'))
   
   # loginページのテンプレートを返す
-  return render_template('signup.html')
+  return render_template('create_account.html')
 
 
 # メールアドレスとパスワードを受け取り処理を行う
 @login_module.route('/signup', methods=['POST'])
 def register_post():
     user = models.Account(
-        name=request.form["new_userid"]
+        name=request.form["new_userid"],
+        # id=str(uuid.uuid4())
     )
    
     user.set_password(request.form["new_password"])

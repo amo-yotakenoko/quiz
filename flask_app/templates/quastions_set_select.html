@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="jp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>問題一覧</title>
+</head>
+
+<body>
+
+
+    <form method="POST">
+        <table>
+            <tr>
+                <!-- <th>questionsetid</th> -->
+                <th>is_select</th>
+                <th>questionsetid</th>
+                <th>questionsetitle</th>
+                <th>questionsetowner</th>
+            </tr>
+            {% for quastions_set in quastions_sets%}
+            <tr>
+                <td><input type="checkbox" name="switch" value="{{ quastions_set.questionsetid }}" /></td>
+                <td>
+                    <p>{{quastions_set.questionsetid }}</p>
+                </td>
+                <td>{{ quastions_set.questionsetitle }}</td>
+                <td>{{ quastions_set.questionsetowner }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="開始">
+    </form>
+</body>
+
+</html>
