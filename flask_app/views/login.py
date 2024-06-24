@@ -87,6 +87,10 @@ def register_post():
     return redirect(url_for('index.index_get'))
 
 
+@login_module.route('/logout')
+def logout():
+    logout_user()
+
 @login_module.route("/users",methods=['GET'])
 def users_get():
     # ユーザオブジェクトを全て取得

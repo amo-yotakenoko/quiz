@@ -11,7 +11,6 @@ quastions_set_select_module = Blueprint("quastions_set_select", __name__)
 def quastions_set_select_get():
     #TODO:所有者でフィルタする
     quastions_sets = models.Questionset.query.all()
-    print('hello', flush=True)
     return render_template('quastions_set_select.html',quastions_sets= quastions_sets)
 
 
@@ -25,6 +24,5 @@ def quastions_set_select_post():
         for quastion in models.Question.query.filter(models.Question.questionsetid == quastions_set_id):
             quastions.append(quastion)
         
-
 
     return render_template('answer_question.html',quastions=quastions)

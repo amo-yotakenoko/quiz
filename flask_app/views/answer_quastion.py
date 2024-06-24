@@ -9,8 +9,6 @@ answer_quastion_module = Blueprint("answer_quastion", __name__)
 
 
 
-@answer_quastion_module.route("/answer_quastion",methods=['POST'])
-def answer_quastion_post():
-    switchs = request.form.getlist("switch")
-    # print(switchs,flush=True)
-    return f"quastion{switchs}"
+@answer_quastion_module.route("/answer_quastion",methods=['GET'])
+def answer_quastion_get(quastions):
+    return render_template('answer_question.html',quastions=quastions)

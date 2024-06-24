@@ -9,13 +9,15 @@
 
 <body>
 
-    あなたのユーザネームは{{ current_user.username }}です。
     {% if current_user.is_authenticated %}
+    あなたのユーザネームは{{ current_user.username }}です。
     <h2>ログイン中</h2>
-
+    <a href="logout">ログアウト</a><br>
     {% else %}
     ログインされていません<br>
     <a href="login">ログイン</a><br>
     <a href="signup">サインアップ</a><br>
     {% endif %}
+    <a href="quastions_set">問題セット管理</a><br>
+    <a href="quastions_set_select">問題を解く</a><br>
 </body>
