@@ -1,0 +1,53 @@
+name: "Build"
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v3
+        with:
+          buildx-version: latest
+          qemu-version: latest
+
+      - name: Build Docker image
+        run: |
+          docker buildx build --platform linux/amd64,linux/arm/v7 . -t ghcr.io/amo-yotakenoko/quiz:${{ github.sha }} --push
+      
+      - name: Checkout to manifest
+        uses: actions/checkout@v2
+        with:
+          ref: manifest
+
+      - name: Update manifest image tag
+        id: update-image-tag
+        continue-on-error: true
+        run: |
+          yq eval '.spec.template.spec.containers[0].image = "ghcr.io/amo-yotakenoko/quiz:"+env(GITHUB_SHA)' -i ./manifests/app-dep.yaml
+          git diff --name-only --exit-code
+
+
+      - name: Commit/Push manifest
+        if: steps.update-image-tag.outcome == 'failure'
+        run: |
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git config user.name github-actions[bot]
+          git add .
+          git commit --author=. -m "Update image tag to $GITHUB_SHA"
+          git push 
