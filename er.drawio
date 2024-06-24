@@ -1,0 +1,102 @@
+<mxfile host="app.diagrams.net" modified="2024-06-24T06:12:26.798Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15" etag="7_ve1sJKziwTXbMMgxIu" version="24.5.4" type="device">
+  <diagram name="ページ1" id="EYmv42VQTT-ELu7vDIaK">
+    <mxGraphModel dx="1666" dy="1142" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="jnle7haWTAM7p2trKdZ5-4" value="アカウント" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-39" y="-21" width="140" height="122" as="geometry">
+            <mxRectangle x="-39" y="-21" width="95" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-5" value="ユーザID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-4" vertex="1">
+          <mxGeometry y="32" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-7" value="ユーザ名" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-4" vertex="1">
+          <mxGeometry y="62" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-9" value="パスワード" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-4" vertex="1">
+          <mxGeometry y="92" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-10" value="ゲームのログ" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="276" y="-21" width="140" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-11" value="参加したユーザのID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-10" vertex="1">
+          <mxGeometry y="30" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-12" value="ゲーム番号" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-10" vertex="1">
+          <mxGeometry y="60" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-13" value="出題された問題" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-10" vertex="1">
+          <mxGeometry y="90" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-14" value="どのユーザがどう回答したか" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-10" vertex="1">
+          <mxGeometry y="120" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-15" value="問題セット一覧" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-10" vertex="1">
+          <mxGeometry y="150" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-16" value="問題セット" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-39" y="263" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-17" value="問題セットID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-16" vertex="1">
+          <mxGeometry y="30" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-18" value="問題タイトル" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-16" vertex="1">
+          <mxGeometry y="60" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-19" value="問題セット所有者" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-16" vertex="1">
+          <mxGeometry y="90" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-20" value="問題" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="276" y="263" width="140" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-21" value="問題セットID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-20" vertex="1">
+          <mxGeometry y="30" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-22" value="問題ID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-20" vertex="1">
+          <mxGeometry y="60" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-23" value="問題文" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-20" vertex="1">
+          <mxGeometry y="90" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-24" value="答え" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-20" vertex="1">
+          <mxGeometry y="120" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-25" value="問題の形式" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-20" vertex="1">
+          <mxGeometry y="150" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-26" value="問題が解かれた回数" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-20" vertex="1">
+          <mxGeometry y="180" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-27" value="正解した回数" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="jnle7haWTAM7p2trKdZ5-20" vertex="1">
+          <mxGeometry y="210" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jnle7haWTAM7p2trKdZ5-34" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;endFill=1;rounded=0;startSize=8;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="jnle7haWTAM7p2trKdZ5-7" target="jnle7haWTAM7p2trKdZ5-12" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-45" y="243" as="sourcePoint" />
+            <mxPoint x="264" y="78" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tAFY0HZINkaHFuz5J5XJ-2" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;endFill=1;rounded=0;entryX=0.507;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="jnle7haWTAM7p2trKdZ5-20" target="jnle7haWTAM7p2trKdZ5-15" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="445" y="222" as="sourcePoint" />
+            <mxPoint x="-91" y="396" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tAFY0HZINkaHFuz5J5XJ-3" value="" style="fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="jnle7haWTAM7p2trKdZ5-18" target="jnle7haWTAM7p2trKdZ5-22" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-189" y="129" as="sourcePoint" />
+            <mxPoint x="-189" y="291" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tAFY0HZINkaHFuz5J5XJ-4" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;endFill=1;rounded=0;" parent="1" source="jnle7haWTAM7p2trKdZ5-9" target="jnle7haWTAM7p2trKdZ5-16" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="143" y="311" as="sourcePoint" />
+            <mxPoint x="243" y="211" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
