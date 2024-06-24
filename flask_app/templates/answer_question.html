@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>クイズ回答</title>
+    <title>問題に回答</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,16 +14,11 @@
                 <li><a href="toppage.html">テーマ一覧</a></li>
             </ul>
         </nav>
-        <h1>クイズ回答</h1>
-        <div id="quiz">
-            <h2 id="quiz-theme"></h2>
-            <p id="quiz-question"></p>
-            <form id="answer-form">
-                <label for="user-answer">あなたの回答:</label>
-                <input type="text" id="user-answer" name="user-answer" required>
-                <input type="submit" value="回答する">
-            </form>
-        </div>
+        <h1 id="quiz-theme">テーマ:</h1>
+        <form id="answer-form">
+            <div id="questions-container"></div>
+            <input type="submit" value="回答する">
+        </form>
         <div id="result"></div>
         <div id="statistics"></div>
     </div>

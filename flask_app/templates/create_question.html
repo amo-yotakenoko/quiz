@@ -8,15 +8,26 @@
 </head>
 <body>
     <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#" id="logout-link">ログアウト</a></li>
+                <li><a href="toppage.html">テーマ一覧</a></li>
+            </ul>
+        </nav>
         <h1>問題作成</h1>
         <form id="create-question-form">
-            <label for="theme">テーマを入力してください:</label>
+            <label for="theme">テーマ:</label>
             <input type="text" id="theme" name="theme" required>
-            <label for="question">問題を入力してください:</label>
-            <textarea id="question" name="question" required></textarea>
-            <label for="answer">正解を入力してください:</label>
-            <input type="text" id="answer" name="answer" required>
-            <input type="submit" value="問題を作成">
+            <div id="question-fields">
+                <div class="question-block">
+                    <label for="question-1">問題:</label>
+                    <textarea id="question-1" name="questions[]" required></textarea>
+                    <label for="answer-1">回答:</label>
+                    <input type="text" id="answer-1" name="answers[]" required>
+                </div>
+            </div>
+            <button type="button" id="add-question">問題を追加</button>
+            <input type="submit" value="作成">
         </form>
     </div>
     <script src="scripts.js"></script>
