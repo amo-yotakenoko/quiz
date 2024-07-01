@@ -13,11 +13,13 @@ def create_question_get(id):
 
 @create_question_module.route("/question/<id>",methods=['POST'])
 def create_question_post(id):
+    print("問題が変更",Flush=True)
     question = models.Question.query.filter_by(questionid=id).one_or_none()
     if question == None:
         return Response(response="<h1>404 Not found<h1/>create_question_module", status=404)
     question.questiontext=request.form["question"]
+    # question.questiontext=request.form["question"]
     db.session.add(question)
     db.session.commit()
-        
+    print(question.questionsetid,Flush=True)
     return redirect(url_for('questions_set.questions_get', id=question.questionsetid))

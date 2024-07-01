@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>問題作成</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
@@ -23,16 +23,16 @@
             <div id="question-fields">
                 <div class="question-block">
                     <label for="question-1">問題:</label>
-                    <textarea id="question-1" name="questions[]" required></textarea>
+                    <textarea id="question" name="questions[]" required></textarea>
                     <label for="answer-1">回答:</label>
-                    <input type="text" id="answer-1" name="answers[]" required>
+                    <input type="text" id="answer" name="answers[]" required>
                 </div>
             </div>
             <button type="button" id="add-question">問題を追加</button>
             <input type="submit" value="作成">
         </form>
     </div>
-    <script src="scripts.js"></script>
+    <!-- <script src="scripts.js"></script> -->
 </body>
 
 </html>
