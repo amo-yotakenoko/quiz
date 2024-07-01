@@ -30,7 +30,7 @@ def create_app():
     
     @login_manager.user_loader
     def load_user(user_id):
-        return models.Account.get(user_id)
+        return models.Account.query.filter_by(id=user_id).one_or_none()
 
     # Blueprintの登録
     from flask_app.views.index import index_module
