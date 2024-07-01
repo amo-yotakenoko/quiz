@@ -50,8 +50,8 @@ def create_app():
     app.register_blueprint(battle_module)
 
 
-    from flask_app.views.db_test import insart_testdata
-    insart_testdata()
+    from flask_app.views.db_test import db_test_module
+    app.register_blueprint(db_test_module)
 
     return app
 
