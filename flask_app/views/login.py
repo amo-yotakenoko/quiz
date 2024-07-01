@@ -39,7 +39,7 @@ def login_post():
     print("ログイン",flush=True)
     # メールアドレスをもとにデータベースへ問い合わせる
     # 結果がゼロの時はNoneを返す
-    user = models.Account.query.filter_by(name=request.form["userid"]).one_or_none()
+    user = models.Account.query.filter_by(name=request.form["username"]).one_or_none()
     
     # ユーザが存在しない or パスワードが間違っている時
     if user is None or not user.check_password(request.form["password"]):
@@ -91,6 +91,7 @@ def register_post():
 @login_module.route('/logout')
 def logout():
     logout_user()
+    return redirect(url_for('index.index_get'))
 
 @login_module.route("/users",methods=['GET'])
 def users_get():
