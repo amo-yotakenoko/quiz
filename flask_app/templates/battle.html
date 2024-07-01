@@ -1,22 +1,31 @@
-バトル
-
-
-
+<h1>バトル</h1>
+<a>{{room_id}}</a>
+<!-- socketio.js -->
+<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+<input type="text" id="input_text" required>
+{%if is_owner%}
+<a>is_owner</a>
+{% endif %}
+<div id="log"></div>
 <script>
-    init();
-    function init() {
+    let socket = io();
 
-        fetch('/battle_init', { method: 'POST', })
-            .then(response => {
-                return response.json();
-            })
-            .then(json => {
-                console.log(json)
-                check_answer = document.getElementById(`answer_${questionid}`);
-                check_answer.innerHTML = `${json.is_correct}`
-            })
-            .catch(error => {
-                console.log(error.message);
-            });
-    }
+    socket.on('connect', function () {
+        socket.emit('join', { username: '{{ current_user.name }}', room_id: '{{room_id}}' });
+    });
+
+    const input_text = document.getElementById("input_text")
+    input_text.addEventListener("change", function () {
+        console.log({ text: input_text.value })
+        socket.emit('message', { text: input_text.value });
+        input_text.value = ""
+    });
+
+    socket.on('client_echo', function (data) {
+        console.log("echo" + ': ' + data.msg);
+    });
+    socket.on('add_log', function (data) {
+        console.log('Received data:', data);
+        document.getElementById('log').innerHTML += `${data.text}<br>`;
+    });
 </script>

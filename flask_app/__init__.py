@@ -2,13 +2,13 @@ from flask import Flask, render_template, request, Response, redirect, url_for, 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
-
+from flask_socketio import SocketIO
 from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
 db = SQLAlchemy()
-
+socketio = SocketIO()
 def create_app():
     # appの設定
     app = Flask(__name__, instance_relative_config=True)
@@ -27,7 +27,7 @@ def create_app():
     login_manager.init_app(app)
 
     CORS(app)
-    
+    socketio.init_app(app)
     @login_manager.user_loader
     def load_user(user_id):
         return models.Account.query.filter_by(id=user_id).one_or_none()
@@ -48,6 +48,10 @@ def create_app():
     app.register_blueprint(answer_question_module)
     from flask_app.views.battle import battle_module
     app.register_blueprint(battle_module)
+
+
+    from flask_app.views.db_test import insart_testdata
+    insart_testdata()
 
     return app
 

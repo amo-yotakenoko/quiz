@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+
+<table>
+
+    {% for room_id, room_info in rooms_data.items()%}
+    <tr>
+
+
+        <td><a href="/rooms/{{room_id }}">
+                <p>{{room_id }}</p>
+            </a></td>
+        <td>{{ room_info}}</td>
+
+    </tr>
+    {% endfor %}
+</table>
