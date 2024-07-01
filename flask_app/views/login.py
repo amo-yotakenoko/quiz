@@ -98,3 +98,17 @@ def users_get():
     # ユーザオブジェクトを全て取得
     users = models.Account.query.all()
     return render_template('users_get.html', users=users)
+
+
+
+
+@login_module.route("/check_exist_userid",methods=['POST'])
+def check_exist_userid():
+
+    is_exeist=models.Account.query.filter_by(name = request.json['new_userid']).first() is not None
+    print(is_exeist,flush=True)
+    # is_exeist=True
+    # if(is_exeist):
+    return  {'exist':is_exeist}
+    # else:
+    # return  {'exist':False}

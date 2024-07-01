@@ -66,6 +66,7 @@
         <form action="/signup" method="post">
             <label for="new_userid">ユーザーID</label>
             <input type="text" id="new_userid" name="new_userid" required>
+            <div id="userid_suffer"></div>
             <label for="email">メールアドレス</label>
             <input type="email" id="email" name="email" required>
             <label for="new_password">パスワード</label>
@@ -81,6 +82,33 @@
 
 
 <script>
+    userid_suffer = false
+    document.getElementById("new_userid").addEventListener("input", function () {
+        const new_userid = document.getElementById("new_userid").value;
+        console.log(`${new_userid}に変更`);
+
+        fetch('/check_exist_userid', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ new_userid: new_userid })
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                console.log(json);
+                userid_suffer = json.exist;
+                document.getElementById("userid_suffer").innerText = userid_suffer ? "useridが被ってます" : ""
+                changePasswordForm();
+            })
+            .catch(error => {
+                console.log(error.message);
+            });
+
+
+    });
 
     document.getElementById("new_password").addEventListener("input", function () {
         changePasswordForm();
@@ -95,7 +123,7 @@
         const confirmPassword = document.getElementById("confirm_password").value;
         const submitButton = document.getElementById("submit");
 
-        if (new_userid !== "" && newPassword === confirmPassword && newPassword !== "") {
+        if (new_userid !== "" && newPassword === confirmPassword && newPassword !== "" && !userid_suffer) {
 
             submitButton.disabled = false;
         } else {
