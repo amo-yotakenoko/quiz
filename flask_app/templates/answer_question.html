@@ -17,20 +17,25 @@
             </ul>
         </nav>
         <h1 id="quiz-theme">テーマ:</h1>
-        <form id="answer-form">
-            <div id="questions-container">
+        <!-- <form id="answer-form"> -->
+        <div id="questions-container">
 
-                {% for question in questions%}
+            {% for question in questions%}
 
 
-                {{question.questionsetid}}-{{question.questionid }}</br>
-                {{question.questiontext}}
-                <br>
-                {% endfor %}
+            {{question.questionsetid}}-{{question.questionid }}</br>
+            {{question.questiontext}}
+            <input type="text" id="input_{{question.questionid}}" />
+            <button onclick="answer({{question.questionid}})">答合わせ</button>
+            <div id="answer_{{question.questionid}}"></div>
+            <!-- <div id=""> -->
+            <br>
+            {% endfor %}
 
-            </div>
-            <input type="submit" value="回答する">
-        </form>
+        </div>
+        <!-- <input type="submit" value="回答する"> -->
+        <!-- </form> -->
+
         <div id="result"></div>
         <div id="statistics"></div>
     </div>
@@ -38,3 +43,27 @@
 </body>
 
 </html>
+<script>
+    function answer(questionid) {
+        console.log(questionid);
+        input_answer = document.getElementById(`input_${questionid}`).value;
+        fetch('/answer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ questionid: questionid, answer: input_answer })
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                console.log(json)
+                check_answer = document.getElementById(`answer_${questionid}`);
+                check_answer.innerHTML = `${json.is_correct}`
+            })
+            .catch(error => {
+                console.log(error.message);
+            });
+    }
+</script>

@@ -21,7 +21,7 @@
             </tr>
             {% for questions_set in questions_sets%}
             <tr>
-                <td><input type="checkbox" name="switch" value="{{ questions_set.questionsetid }}" /></td>
+                <td><input type="checkbox" name="switch" value="{{ questions_set.questionsetid }}" checked /></td>
                 <td>
                     <p>{{questions_set.questionsetid }}</p>
                 </td>

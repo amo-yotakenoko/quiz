@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, Response, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
+from flask_cors import CORS
 
 from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -26,6 +26,8 @@ def create_app():
     login_manager = LoginManager()
     login_manager.init_app(app)
 
+    CORS(app)
+    
     @login_manager.user_loader
     def load_user(user_id):
         return models.Account.get(user_id)
