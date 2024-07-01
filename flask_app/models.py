@@ -9,7 +9,7 @@ class Account(UserMixin, db.Model):
     # 数値型のidカラム
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     # 文字列型のnameカラム
-    name = db.Column(db.String(128))
+    name = db.Column(db.String(128), unique= True)
 
     # mail = db.Column(db.String(128), unique=True)
     password = db.Column(db.String(256))
