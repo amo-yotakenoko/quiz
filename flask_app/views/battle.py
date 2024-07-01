@@ -18,11 +18,17 @@ def battle_get():
 
 @battle_module.route("/rooms",methods=['GET'])
 def rooms_get():
-    return render_template('room_select.html',rooms_data=rooms_data)
+    return render_template('room_select.html',rooms_data=rooms_data,uuid=uuid.uuid4())
 
 @battle_module.route("/rooms/<id>",methods=['GET'])
-def questions_get(id):
-    return render_template('lobby.html',room_id=id,is_owner=False)
+def room_get(id):
+    room_id=id
+    if f"{room_id}" not in rooms_data:
+        rooms_data[f"{room_id}"] = {"status": "waiting_to_join", "members": []}
+        socketio.start_background_task(lobby_wait,f"{room_id}")
+        return render_template('lobby.html',room_id=id,is_owner=True)
+    else:
+        return render_template('lobby.html',room_id=id,is_owner=False)
 
 #クライアントとのコネクション確立
 # @socketio.on('connect')
@@ -30,13 +36,13 @@ def questions_get(id):
 #     emit('client_echo',{'msg': 'server connected!'})
 #     socketio.emit('add_log', msg)
 
-@battle_module.route('/room_create', methods=['GET'])
-def room_create():
-    room_id=uuid.uuid4()
-    # room_id="1234"
-    rooms_data[f"{room_id}"] = {"status": "waiting_to_join", "members": []}
-    socketio.start_background_task(lobby_wait,f"{room_id}")
-    return render_template('lobby.html',room_id=room_id,is_owner=True)
+# @battle_module.route('/room_create/', methods=['GET'])
+# def room_create():
+#     room_id=uuid.uuid4()
+#     # room_id="1234"
+#     rooms_data[f"{room_id}"] = {"status": "waiting_to_join", "members": []}
+#     socketio.start_background_task(lobby_wait,f"{room_id}")
+#     return render_template('lobby.html',room_id=room_id,is_owner=True)
 
 
 #クライアントからのメッセージを出力する関数
@@ -89,7 +95,7 @@ def lobby_wait(room_id):
         #     socketio.emit('update_data', {'time': i})  
         #     print(rooms_data,flush=True)
 
-@battle_module.route("/battle/<id>",methods=['GET'])
+@battle_module.route("/rooms/battle/<id>",methods=['GET'])
 def battles_get(id):
     room_id=id
     questions = []
