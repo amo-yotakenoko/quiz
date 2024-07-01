@@ -36,6 +36,7 @@ def login_get():
 # メールアドレスとパスワードを受け取り処理を行う
 @login_module.route('/login', methods=['POST'])
 def login_post():
+    print("ログイン",flush=True)
     # メールアドレスをもとにデータベースへ問い合わせる
     # 結果がゼロの時はNoneを返す
     user = models.Account.query.filter_by(name=request.form["userid"]).one_or_none()

@@ -17,18 +17,18 @@
             </ul>
         </nav>
         <h1>問題作成</h1>
-        <form id="create-question-form">
+        <form id="create-question-form" method="POST">
             <label for="theme">テーマ:</label>
             <input type="text" id="theme" name="theme" required>
             <div id="question-fields">
                 <div class="question-block">
-                    <label for="question-1">問題:</label>
-                    <textarea id="question" name="questions[]" required></textarea>
-                    <label for="answer-1">回答:</label>
-                    <input type="text" id="answer" name="answers[]" required>
+                    <label>問題:</label>
+                    <textarea name="question" required></textarea>
+                    <label>回答:</label>
+                    <input type="text" name="answer" required>
                 </div>
             </div>
-            <button type="button" id="add-question">問題を追加</button>
+            <!-- <button type="button" id="add-question">問題を追加</button> -->
             <input type="submit" value="作成">
         </form>
     </div>
