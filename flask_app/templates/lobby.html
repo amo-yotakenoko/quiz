@@ -22,7 +22,7 @@
     const input_text = document.getElementById("input_text")
     input_text.addEventListener("change", function () {
         console.log({ text: input_text.value })
-        socket.emit('message', { text: input_text.value, room_id: '{{room_id}}' });
+        socket.emit('message', { username: '{{ current_user.name }}', text: input_text.value, room_id: '{{room_id}}' });
         input_text.value = ""
     });
 

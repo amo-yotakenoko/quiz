@@ -53,7 +53,8 @@ def join(msg):
     join_room(room_id)
     socketio.emit('add_log', { "text": f"{msg['username']}がjoin" } ,room=room_id)  
     #TODO:部屋を抜けたとき
-    rooms_data[room_id]["members"].append(msg['username'])
+    if msg['username'] not in rooms_data[room_id]["members"]:
+        rooms_data[room_id]["members"].append(msg['username'])
     print(rooms_data[room_id],flush=True)
       
 

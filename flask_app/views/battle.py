@@ -7,9 +7,8 @@ from flask_socketio import SocketIO, send, emit ,join_room,leave_room, close_roo
 from flask_cors import CORS
 import uuid
 from flask_app.views.lobby import rooms_data
-
+import random
 battle_module = Blueprint("battle", __name__)
-
 
 @socketio.on('game_start')
 def message(msg):
@@ -23,10 +22,49 @@ def message(msg):
     print(questions,flush=True)
     socketio.sleep(1)
     socketio.emit('add_log', {'text': f"ゲーム開始"} ,room=room_id)
+    rooms_data[room_id]["score"]={}
+    for user in rooms_data[room_id]["members"]:
+        rooms_data[room_id]["score"][user]=0
+    update_ranking(room_id)
     for question in questions:
-        socketio.sleep(1)
         print(f"問題:{question.questiontext}",flush=True)
+        rooms_data[room_id]["questionid"]=question.questionid
+        rooms_data[room_id]["correct_order"]=0
         socketio.emit('add_log', {'text': f"問題:{question.questiontext}"} ,room=room_id)
+        socketio.sleep(10)
+        socketio.emit('add_log', {'text': f"答え:{question.answer}"} ,room=room_id)
+        socketio.sleep(1)
+
+
+@socketio.on('send_answer')
+def message(msg):
+    print(msg,flush=True)
+    room_id=msg['room_id']
+    username=msg['username']
+    question=models.Question.query.filter(models.Question.questionid ==  rooms_data[f"{room_id}"]["questionid"]).first()
+
+
+    is_correct=msg['answer']==question.answer
+    log='🙆‍♂️' if is_correct else '🙅'
+    if( is_correct):
+        rooms_data[room_id]["correct_order"]+=1
+        addpoint=1
+        if(rooms_data[room_id]["correct_order"]==1):
+            addpoint=10
+        if(rooms_data[room_id]["correct_order"]==2):
+            addpoint=5
+        if(rooms_data[room_id]["correct_order"]==3):
+            addpoint=2
+        rooms_data[room_id]["score"][username]+=addpoint
+        update_ranking(room_id)
+        log+=f"+{addpoint}points"
+    else:
+        log+=msg['answer']
+    socketio.emit('add_log', {'text': f"{username}:{log}"},room=msg['room_id'])  
+
+def update_ranking(room_id):
+    ranking= dict(sorted( rooms_data[room_id]["score"].items(), key=lambda x: x[1], reverse=True))
+    socketio.emit('update_ranking',ranking,room=room_id)  
 
 
 @battle_module.route("/rooms/battle/<id>",methods=['GET'])
@@ -49,6 +87,7 @@ def quastions_get(room_id):
                     if(question not in questions):
                         questions.append(question)
                     print(question.questionid,flush=True)
+    random.shuffle(questions)
     return questions
-    print(questions,flush=True)
+
     

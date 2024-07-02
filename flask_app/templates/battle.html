@@ -9,8 +9,8 @@
 
 
 
+<div id="ranking"></div>
 <div id="log"></div>
-
 <script>
     let socket = io();
 
@@ -23,7 +23,7 @@
     const input_text = document.getElementById("input_text")
     input_text.addEventListener("change", function () {
         console.log({ text: input_text.value })
-        socket.emit('message', { text: input_text.value, room_id: '{{room_id}}' });
+        socket.emit('send_answer', { username: '{{ current_user.name }}', answer: input_text.value, room_id: '{{room_id}}' });
         input_text.value = ""
     });
 
@@ -33,6 +33,12 @@
     socket.on('add_log', function (data) {
         console.log('Received data:', data);
         document.getElementById('log').innerHTML += `${data.text}<br>`;
+    });
+
+    socket.on('update_ranking', function (data) {
+        console.log('update_ranking:', data);
+        let ranking = JSON.stringify(data);
+        document.getElementById('ranking').innerHTML = `${ranking}<br>`;
     });
 
 </script>
