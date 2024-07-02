@@ -1,14 +1,38 @@
+<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 <h1>バトル</h1>
 <a>{{room_id}}</a>
 
-{% for question in questions%}
 
-
-{{question.questionsetid}}-{{question.questionid }}</br>
-{{question.questiontext}}
-<input type="text" id="input_{{question.questionid}}" />
-<button onclick="answer({{question.questionid}})">答合わせ</button>
-<div id="answer_{{question.questionid}}"></div>
+<input type="text" id="input_text" required>
 <!-- <div id=""> -->
 <br>
-{% endfor %}
+
+
+
+<div id="log"></div>
+
+<script>
+    let socket = io();
+
+    socket.on('connect', function () {
+        socket.emit('join', { username: '{{ current_user.name }}', room_id: '{{room_id}}' });
+    });
+
+
+
+    const input_text = document.getElementById("input_text")
+    input_text.addEventListener("change", function () {
+        console.log({ text: input_text.value })
+        socket.emit('message', { text: input_text.value, room_id: '{{room_id}}' });
+        input_text.value = ""
+    });
+
+    socket.on('client_echo', function (data) {
+        console.log("echo" + ': ' + data.msg);
+    });
+    socket.on('add_log', function (data) {
+        console.log('Received data:', data);
+        document.getElementById('log').innerHTML += `${data.text}<br>`;
+    });
+
+</script>

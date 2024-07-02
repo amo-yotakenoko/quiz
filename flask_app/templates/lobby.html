@@ -1,7 +1,7 @@
+<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 <h1>ロビー</h1>
 <a>{{room_id}}</a>
 <!-- socketio.js -->
-<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 <input type="text" id="input_text" required>
 {%if is_owner%}
 <a><button id="game_start_button" onclick="game_start()">ゲームスタート</button></a>
@@ -33,7 +33,9 @@
         console.log('Received data:', data);
         document.getElementById('log').innerHTML += `${data.text}<br>`;
     });
+
     socket.on('redirect', function (data) {
+        socket.disconnect();
         window.location.href = data.url;
     });
 </script>
