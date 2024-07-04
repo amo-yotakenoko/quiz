@@ -6,7 +6,7 @@ from flask_app import db
 from flask_app.models import db, Questionset, Question
 
 db_test_module = Blueprint("db_test", __name__)
-@db_test_module.route('/db_test', methods=['GET'])
+@db_test_module.route('/add_test_quastion', methods=['GET'])
 def insart_testdata():
 
     user1 = Questionset(questionsetitle="初級数学クイズ", questionsetowner=1)
@@ -119,3 +119,10 @@ def insart_testdata():
 
     db.session.commit()
     return "追加しました"
+
+
+@db_test_module.route('/delete_users', methods=['GET'])
+def delete_users():
+    db.session.query(models.Account).delete()
+    db.session.commit()
+    return "aa"
