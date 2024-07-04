@@ -32,7 +32,9 @@ def message(msg):
         rooms_data[room_id]["correct_order"]=0
         # socketio.emit('add_log', {'text': f"問題:{question.questiontext}"} ,room=room_id)
         socketio.emit('question',question.questiontext ,room=room_id)
-        socketio.sleep(10)
+        for i in range(10,0,-1):
+            socketio.emit('timer', i ,room=room_id)
+            socketio.sleep(1)
         socketio.emit('add_log', {'text': f"答え:{question.answer}"} ,room=room_id)
         socketio.sleep(1)
 

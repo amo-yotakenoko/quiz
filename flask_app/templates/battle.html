@@ -9,6 +9,7 @@
 <h2>
     <div id="question"></div>
 </h2>
+残り<div id="timer"></div>秒
 
 <input type="text" id="input_text" required>
 <!-- <div id=""> -->
@@ -58,6 +59,12 @@
         document.getElementById("input_text").disabled = false;
     });
 
+    socket.on('timer', function (data) {
+        console.log(data)
+        document.getElementById('timer').innerHTML = data;
+
+    });
+
 
     // socket.on('correct', function (data) {
     //     alert("正解!");
@@ -67,7 +74,7 @@
 
     socket.on('update_ranking', function (data) {
         console.log('update_ranking:', data);
-        let rankingHTML = '<table><tbody>';
+        let rankingHTML = '<table  border="1"><tbody>';
         for (let user in data) {
             // console.log(`< tr ><td>${key}</td><td>${data[key]}</td></tr > `);
             console.log(user, '{{ current_user.name }}')
