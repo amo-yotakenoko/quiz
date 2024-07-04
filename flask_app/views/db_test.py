@@ -44,6 +44,39 @@ def insart_testdata():
     db.session.add(question5_user1)
 
     db.session.commit()
+    user1_2 = Questionset(questionsettitle="Pythonの基本クイズ", questionsetowner=1)
+    db.session.add(user1_2)
+    db.session.commit()
+
+    question1_user1_2 = Question(questionsetid=user1_2.questionsetid,
+                            questiontext="Pythonのコメントを記述する記号は何か？",
+                            answer="#",
+                            questionformat=1)
+    db.session.add(question1_user1_2)
+
+    question2_user1_2 = Question(questionsetid=user1_2.questionsetid,
+                            questiontext="Pythonで文字列を結合する演算子は何か？",
+                            answer="+",
+                            questionformat=1)
+    db.session.add(question2_user1_2)
+
+    question3_user1_2 = Question(questionsetid=user1_2.questionsetid,
+                            questiontext="Pythonで変数を代入する演算子は何か？",
+                            answer="=",
+                            questionformat=1)
+    db.session.add(question3_user1_2)
+
+    question4_user1_2 = Question(questionsetid=user1_2.questionsetid,
+                            questiontext="Pythonで条件分岐を行うためのキーワードは何か？",
+                            answer="if",
+                            questionformat=1)
+    db.session.add(question4_user1_2)
+
+    question5_user1_2 = Question(questionsetid=user1_2.questionsetid,
+                            questiontext="Pythonのリスト内包表記の記法はどうなっているか？",
+                            answer="[式 for 要素 in イテラブル]",
+                            questionformat=1)
+    db.session.add(question5_user1_2)
 
     # ユーザー2のクイズセットとクイズの作成
     user2 = Questionset(questionsetitle="動物の科学クイズ", questionsetowner=2)
