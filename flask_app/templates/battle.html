@@ -54,7 +54,7 @@
     socket.on('question', function (data) {
         console.log(data)
         document.getElementById('log').innerHTML = ``;
-        document.getElementById("question").innerHTML = `${data} < br > `;
+        document.getElementById("question").innerHTML = `${data} <br> `;
         document.getElementById("input_text").disabled = false;
     });
 
@@ -68,9 +68,16 @@
     socket.on('update_ranking', function (data) {
         console.log('update_ranking:', data);
         let rankingHTML = '<table><tbody>';
-        for (let key in data) {
+        for (let user in data) {
             // console.log(`< tr ><td>${key}</td><td>${data[key]}</td></tr > `);
-            rankingHTML += `< tr ><td>${key}</td><td>${data[key]}points</td></tr >`;
+            console.log(user, '{{ current_user.name }}')
+            if (user == '{{ current_user.name }}') {
+                rankingHTML += `<tr><td><strong>${user}</strong></td><td><strong>${data[user]}points</strong></td></tr >`;
+            } else {
+                rankingHTML += `<tr><td>${user}</td><td>${data[user]}points</td></tr >`;
+            }
+
+
         }
         rankingHTML += '</tbody></table>';
         console.log(rankingHTML);
