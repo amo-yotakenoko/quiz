@@ -44,7 +44,7 @@ def insart_testdata():
     db.session.add(question5_user1)
 
     db.session.commit()
-    user1_2 = Questionset(questionsettitle="Pythonの基本クイズ", questionsetowner=1)
+    user1_2 = Questionset(questionsetitle="Pythonの基本クイズ", questionsetowner=1)
     db.session.add(user1_2)
     db.session.commit()
 
@@ -153,7 +153,12 @@ def insart_testdata():
     db.session.commit()
     return "追加しました"
 
-
+@db_test_module.route('/delete_quiz', methods=['GET'])
+def delete_quiz():
+    db.session.query(models.Questionset).delete()
+    db.session.query(models.Question).delete()
+    db.session.commit()
+    return "aa"
 @db_test_module.route('/delete_users', methods=['GET'])
 def delete_users():
     db.session.query(models.Account).delete()

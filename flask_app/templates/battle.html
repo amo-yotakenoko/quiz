@@ -1,7 +1,14 @@
 <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
 <h1>バトル</h1>
-<a>{{room_id}}</a>
+{{room_id}}
 
+
+
+<div id="ranking"></div>
+<h2>
+    <div id="question"></div>
+</h2>
 
 <input type="text" id="input_text" required>
 <!-- <div id=""> -->
@@ -9,7 +16,6 @@
 
 
 
-<div id="ranking"></div>
 <div id="log"></div>
 <script>
     let socket = io();
@@ -35,10 +41,40 @@
         document.getElementById('log').innerHTML += `${data.text}<br>`;
     });
 
+    socket.on('post_answer', function (data) {
+        console.log('Received data:', data);
+        document.getElementById('log').innerHTML += `${data.username}:${data.answer}:${data.is_correct ? '🙆‍♂️' : '🙅'}<br>`;
+        if (data.is_correct && '{{ current_user.name }}' == data.username) {
+            alert("正解!");
+            document.getElementById("input_text").disabled = true;
+        }
+    });
+
+
+    socket.on('question', function (data) {
+        console.log(data)
+        document.getElementById('log').innerHTML = ``;
+        document.getElementById("question").innerHTML = `${data} < br > `;
+        document.getElementById("input_text").disabled = false;
+    });
+
+
+    // socket.on('correct', function (data) {
+    //     alert("正解!");
+
+    //     document.getElementById("input_text").disabled = true;
+    // });
+
     socket.on('update_ranking', function (data) {
         console.log('update_ranking:', data);
-        let ranking = JSON.stringify(data);
-        document.getElementById('ranking').innerHTML = `${ranking}<br>`;
+        let rankingHTML = '<table><tbody>';
+        for (let key in data) {
+            // console.log(`< tr ><td>${key}</td><td>${data[key]}</td></tr > `);
+            rankingHTML += `< tr ><td>${key}</td><td>${data[key]}points</td></tr >`;
+        }
+        rankingHTML += '</tbody></table>';
+        console.log(rankingHTML);
+        document.getElementById('ranking').innerHTML = rankingHTML;
     });
 
 </script>

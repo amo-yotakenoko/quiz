@@ -30,7 +30,8 @@ def message(msg):
         print(f"問題:{question.questiontext}",flush=True)
         rooms_data[room_id]["questionid"]=question.questionid
         rooms_data[room_id]["correct_order"]=0
-        socketio.emit('add_log', {'text': f"問題:{question.questiontext}"} ,room=room_id)
+        # socketio.emit('add_log', {'text': f"問題:{question.questiontext}"} ,room=room_id)
+        socketio.emit('question',question.questiontext ,room=room_id)
         socketio.sleep(10)
         socketio.emit('add_log', {'text': f"答え:{question.answer}"} ,room=room_id)
         socketio.sleep(1)
@@ -58,9 +59,10 @@ def message(msg):
         rooms_data[room_id]["score"][username]+=addpoint
         update_ranking(room_id)
         log+=f"+{addpoint}points"
-    else:
-        log+=msg['answer']
-    socketio.emit('add_log', {'text': f"{username}:{log}"},room=msg['room_id'])  
+        # socketio.emit('correct', "正解" )  
+
+
+    socketio.emit('post_answer', {'username':username,'answer':msg['answer'],'is_correct':is_correct},room=msg['room_id'])  
 
 def update_ranking(room_id):
     ranking= dict(sorted( rooms_data[room_id]["score"].items(), key=lambda x: x[1], reverse=True))
