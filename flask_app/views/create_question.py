@@ -9,7 +9,8 @@ create_question_module = Blueprint("create_question", __name__)
 
 @create_question_module.route("/question/<id>",methods=['GET'])
 def create_question_get(id):
-    return render_template('create_question.html', id=id)
+    question = models.Question.query.filter_by(questionid=id).one_or_none()
+    return render_template('create_question.html', id=id,question=  question)
 
 @create_question_module.route("/question/<id>",methods=['POST'])
 def create_question_post(id):

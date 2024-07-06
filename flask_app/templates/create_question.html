@@ -12,8 +12,8 @@
     <div class="container">
         <nav>
             <ul>
-                <li><a href="{{ url_for("login.logout") }}" id="logout-link">ログアウト</a></li>
-                <li><a href="{{ url_for("index.index_get") }}">テーマ一覧</a></li>
+                <li><a href="{{ url_for('login.logout') }}" id="logout-link">ログアウト</a></li>
+                <li><a href="{{ url_for('index.index_get') }}">テーマ一覧</a></li>
             </ul>
         </nav>
         <h1>問題作成</h1>
@@ -23,17 +23,17 @@
             <div id="question-fields">
                 <div class="question-block">
                     <label>問題:</label>
-                    <textarea name="question" required></textarea>
+                    <textarea name="question" required>{{question.questiontext}}</textarea>
                     <label>形式:</label>
                     <div>
-                        <input type="radio" name="type" id="type_choice" value="choice" checked/>
+                        <input type="radio" name="type" id="type_choice" value="choice" checked />
                         <label class="radio" for="type_choice">選択式</label>
                         <input type="radio" name="type" id="type_text" value="text" />
                         <label class="radio" for="type_text">文字入力式</label>
                     </div>
                     <label>解答:</label>
                     <div id="answer_text" style="display: none;">
-                        <input type="text" name="answer" required>
+                        <input type="text" name="answer" value="{{question.answer}}" required>{{question.answer}}
                     </div>
                     <div id="answer_choice">
                         <label>正解:</label>
@@ -54,21 +54,21 @@
 </body>
 
 <script>
-const radio_choice = document.getElementById("type_choice")
-const radio_text = document.getElementById("type_text")
-const answer_text = document.getElementById("answer_text")
-const answer_choice = document.getElementById("answer_choice")
+    const radio_choice = document.getElementById("type_choice")
+    const radio_text = document.getElementById("type_text")
+    const answer_text = document.getElementById("answer_text")
+    const answer_choice = document.getElementById("answer_choice")
 
-radio_choice.onchange = function() {
-    console.log("a")
-    answer_choice.style.display = "block"
-    answer_text.style.display = "none"
-}
-radio_text.onchange = function() {
-    console.log("b")
-    answer_choice.style.display = "none"
-    answer_text.style.display = "block"
-}
+    radio_choice.onchange = function () {
+        console.log("a")
+        answer_choice.style.display = "block"
+        answer_text.style.display = "none"
+    }
+    radio_text.onchange = function () {
+        console.log("b")
+        answer_choice.style.display = "none"
+        answer_text.style.display = "block"
+    }
 </script>
 
 <style>
