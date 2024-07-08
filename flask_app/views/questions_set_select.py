@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, Response, redirect, url_for, 
 from flask import Blueprint, jsonify
 from flask_app import models
 from flask_app import db
+from sqlalchemy import or_
 from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user
 
 questions_set_select_module = Blueprint("questions_set_select", __name__)
@@ -11,6 +12,7 @@ questions_set_select_module = Blueprint("questions_set_select", __name__)
 def questions_set_select_get():
     #TODO:所有者でフィルタする
     questions_sets = models.Questionset.query.all()
+    # .filter(or_( models.Questionset.questionsetowner ==current_user.get_id(), models.Questionset.questionsetowner == 0))
     return render_template('questions_set_select.html',questions_sets= questions_sets)
 
 

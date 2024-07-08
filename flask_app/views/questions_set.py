@@ -11,7 +11,7 @@ questions_set_module = Blueprint("questions_set", __name__)
 @questions_set_module.route("/questions_set",methods=['GET'])
 def questions_set_get():
     #TODO:所有者でフィルタする
-    questions_sets = models.Questionset.query.all()
+    questions_sets = models.Questionset.query.filter_by(questionsetowner=current_user.get_id()).all()
     return render_template('questions_set.html',questions_sets= questions_sets)
 
 @questions_set_module.route("/questions_set",methods=['POST'])

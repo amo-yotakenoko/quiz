@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, Response, redirect, url_for, flash
 from flask import Blueprint
 from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user

@@ -6,6 +6,7 @@ from flask_app import db,socketio
 from flask_socketio import SocketIO, send, emit ,join_room,leave_room, close_room, rooms, disconnect, ConnectionRefusedError
 from flask_cors import CORS
 import uuid
+from sqlalchemy import or_
 # from flask import current_app
 lobby_module = Blueprint("lobby", __name__)
 
@@ -18,7 +19,7 @@ rooms_data= {}
 
 @lobby_module.route("/rooms",methods=['GET'])
 def rooms_get():
-    questions_sets = models.Questionset.query.all()
+    
     return render_template('room_select.html',rooms_data=rooms_data,uuid=uuid.uuid4())
 
 @lobby_module.route("/rooms/<id>",methods=['GET'])
@@ -29,7 +30,7 @@ def room_get(id):
         rooms_data[f"{room_id}"] = {"status": "waiting_to_join", "members": [],"question_set":[]}
         is_owner=True
 
-    questions_sets = models.Questionset.query.all()
+    questions_sets = questions_sets = models.Questionset.query.filter(or_( models.Questionset.questionsetowner ==current_user.get_id(), models.Questionset.questionsetowner == 0)).all()
     return render_template('lobby.html',room_id=id,is_owner=is_owner,questions_sets= questions_sets)
 
 #クライアントとのコネクション確立
