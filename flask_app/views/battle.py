@@ -37,6 +37,10 @@ def message(msg):
             socketio.sleep(1)
         socketio.emit('add_log', {'text': f"答え:{question.answer}"} ,room=room_id)
         socketio.sleep(1)
+        socketio.emit('add_log', {'text': f"終わりです<a href=\"{ url_for('index.index_get') }\" >戻る</a>"} ,room=room_id)
+        rooms_data[room_id]["status"]="finish"
+    # socketio.emit('question',"おわり" ,room=room_id)
+    print(url_for('lobby.room_get'),flush=True)
 
 
 @socketio.on('send_answer')

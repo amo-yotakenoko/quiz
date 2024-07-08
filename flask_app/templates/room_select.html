@@ -4,14 +4,26 @@
 
     {% for room_id, room_info in rooms_data.items()%}
     <tr>
-
-
-        <td><a href="/rooms/{{room_id }}">
-                <p>{{room_id }}</p>
-            </a></td>
+        <td>
+            {% if room_info["status"] == "waiting_to_join" %}
+            <a href="/rooms/{{ room_id }}">
+                <p>{{ room_id }}</p>
+            </a>
+            {% else %}
+            <a>
+                <p>{{ room_id }}</p>
+            </a>
+            {% endif %}
+        </td>
         <td>{{ room_info}}</td>
 
     </tr>
     {% endfor %}
     <a href="rooms/{{uuid}}">ルームを作成</a><br>
 </table>
+<script>
+    setInterval(function () {
+        console.log("reload");
+        location.reload();
+    }, 1000);
+</script>
