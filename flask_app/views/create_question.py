@@ -16,7 +16,14 @@ def create_question_get(id):
 
     return render_template('create_question.html', id=id,question=  question,selection=selection)
 
+@create_question_module.route("/question_delete",methods=['POST'])
+def question_delete():
+    print( request.json['questionid'],"削除",flush=True)
+    question = models.Question.query.filter_by(questionid=request.json['questionid']).one_or_none()
 
+    db.session.delete(question)
+    db.session.commit()
+    return redirect(url_for('questions_set.questions_get', id=question.questionsetid))
 
 @create_question_module.route("/question/<id>",methods=['POST'])
 def create_question_post(id):

@@ -14,6 +14,7 @@
             <ul>
                 <li><a href="{{ url_for('login.logout') }}" id="logout-link">ログアウト</a></li>
                 <li><a href="{{ url_for('index.index_get') }}">テーマ一覧</a></li>
+                <button onclick="question_delete()">問題を削除</button>
             </ul>
         </nav>
         <h1>問題作成</h1>
@@ -58,6 +59,15 @@
     const radio_text = document.getElementById("type_text")
     const answer_text = document.getElementById("answer_text")
     const answer_choice = document.getElementById("answer_choice")
+
+    function question_delete() {
+        fetch('/question_delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ questionid: '{{question.questionid}}' })
+        })
+        window.location.href = "{{ url_for('questions_set.questions_get', id = question.questionsetid) }}"
+    }
 
     window.onload = function () {
         {% if question.questionformat == 0 %}
