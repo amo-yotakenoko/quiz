@@ -19,7 +19,7 @@
         <h1>問題作成</h1>
         <form id="create-question-form" method="POST">
             <label for="theme">テーマ:</label>
-            <input type="text" id="theme" name="theme" required>
+            <input type="text" id="theme" name="theme" value="テーマ名スタブ" required disabled>
             <div id="question-fields">
                 <div class="question-block">
                     <label>問題:</label>
@@ -28,7 +28,7 @@
                     <div>
                         <input type="radio" name="type" id="type_text" value="text" />
                         <label class="radio" for="type_text">文字入力式</label>
-                        <input type="radio" name="type" id="type_choice" value="choice" checked />
+                        <input type="radio" name="type" id="type_choice" value="choice" />
                         <label class="radio" for="type_choice">選択式</label>
                     </div>
                     <label>解答:</label>
@@ -37,13 +37,13 @@
                     </div>
                     <div id="answer_choice">
                         <label>正解:</label>
-                        <input id="choice_correct" type="text" />
+                        <input name="choice_correct" type="text" value="{{selection['choice_correct']}}" />
                         <label>不正解1:</label>
-                        <input id="choice_incorrect1" type="text" />
+                        <input name="choice_incorrect1" type="text" value="{{selection['choice_incorrect1']}}" />
                         <label>不正解2:</label>
-                        <input id="choice_incorrect2" type="text" />
+                        <input name="choice_incorrect2" type="text" value="{{selection['choice_incorrect1']}}" />
                         <label>不正解3:</label>
-                        <input id="choice_incorrect3" type="text" />
+                        <input name="choice_incorrect3" type="text" value="{{selection['choice_incorrect3']}}" />
                     </div>
                 </div>
             </div>
@@ -58,6 +58,19 @@
     const radio_text = document.getElementById("type_text")
     const answer_text = document.getElementById("answer_text")
     const answer_choice = document.getElementById("answer_choice")
+
+    window.onload = function () {
+        {% if question.questionformat == 0 %}
+        radio_text.checked = true
+        answer_choice.style.display = "none";
+        answer_text.style.display = "block";
+        {% else %}
+        radio_choice.checked = true
+        answer_choice.style.display = "block";
+        answer_text.style.display = "none";
+        {% endif %}
+    }
+
 
     radio_choice.onchange = function () {
         console.log("a")
