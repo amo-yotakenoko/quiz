@@ -18,17 +18,19 @@ rooms_data= {}
 
 @lobby_module.route("/rooms",methods=['GET'])
 def rooms_get():
+    questions_sets = models.Questionset.query.all()
     return render_template('room_select.html',rooms_data=rooms_data,uuid=uuid.uuid4())
 
 @lobby_module.route("/rooms/<id>",methods=['GET'])
 def room_get(id):
     room_id=id
+    is_owner=False
     if f"{room_id}" not in rooms_data:
-        rooms_data[f"{room_id}"] = {"status": "waiting_to_join", "members": []}
-        # socketio.start_background_task(lobby_wait,f"{room_id}")
-        return render_template('lobby.html',room_id=id,is_owner=True)
-    else:
-        return render_template('lobby.html',room_id=id,is_owner=False)
+        rooms_data[f"{room_id}"] = {"status": "waiting_to_join", "members": [],"question_set":[]}
+        is_owner=True
+
+    questions_sets = models.Questionset.query.all()
+    return render_template('lobby.html',room_id=id,is_owner=is_owner,questions_sets= questions_sets)
 
 #クライアントとのコネクション確立
 # @socketio.on('connect')
@@ -62,6 +64,22 @@ def join(msg):
 def message(msg):
     print(msg,flush=True)
     socketio.emit('add_log', msg,room=msg['room_id'])  
+
+@socketio.on('select_questionset')
+def select_questionset(msg):
+    print(msg,flush=True)
+    room_id=msg['room_id']
+    question_set_id=msg["questionset"]
+    enable=msg["enable"]
+    print(question_set_id,enable,flush=True)
+    if(enable):
+        rooms_data[ room_id]["question_set"].append(question_set_id)
+    else:
+        rooms_data[ room_id]["question_set"].remove(question_set_id)
+    # if()
+
+    
+
 
 
 

@@ -7,9 +7,38 @@
 <a><button id="game_start_button" onclick="game_start()">ゲームスタート</button></a>
 {% endif %}
 
+<table border="1">
+    <tr>
+        <!-- <th>questionsetid</th> -->
+        <th>is_select</th>
+        <th>questionsetid</th>
+        <th>questionsetitle</th>
+        <th>questionsetowner</th>
+    </tr>
+    {% for questions_set in questions_sets%}
+    <tr>
+        <td><input type="checkbox" id="switch_{{ questions_set.questionsetid }}"
+                value="{{ questions_set.questionsetid }}"
+                onclick="select_questionset('{{ questions_set.questionsetid }}')" /></td>
+
+        <td>
+            <p>{{questions_set.questionsetid }}</p>
+        </td>
+        <td>{{ questions_set.questionsetitle }}</td>
+        <td>{{ questions_set.questionsetowner }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
 <div id="log"></div>
 <script>
     let socket = io();
+    function select_questionset(questionsetid) {
+        console.log(document.getElementById(`switch_${questionsetid}`).checked)
+        socket.emit('select_questionset', { questionset: questionsetid, enable: document.getElementById(`switch_${questionsetid}`).checked, room_id: '{{room_id}}' });
+    }
 
     socket.on('connect', function () {
         socket.emit('join', { username: '{{ current_user.name }}', room_id: '{{room_id}}' });

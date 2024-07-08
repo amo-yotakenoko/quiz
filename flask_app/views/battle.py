@@ -95,20 +95,32 @@ def battles_get(id):
 
 def quastions_get(room_id):
     questions = []
-    for username in rooms_data[room_id]["members"]:
-        user = models.Account.query.filter_by(name=username).first()
-        if user:
-            print(user.id,flush=True)
-            questionsets = models.Questionset.query.filter_by(questionsetowner=user.id).all()
-            for questionset in questionsets:
-                print(questionset.questionsetid,flush=True)
-                questions_in_set = models.Question.query.filter_by(questionsetid=questionset.questionsetid).all()
-                for question in questions_in_set:
-                    if(question not in questions):
-                        questions.append(question)
-                    print(question.questionid,flush=True)
+    for questionsetid in  rooms_data[room_id]["question_set"]:
+        questions_set = models.Question.query.filter_by(questionsetid=questionsetid).all()
+        for question in questions_set:
+            if(question not in questions):
+                questions.append(question)
+            print(question.questionid,flush=True)
     random.shuffle(questions)
-    questions = questions[:10]
+    # questions = questions[:10]
     return questions
 
-    
+
+# #ユーザーの奴全部とる奴、没
+# def quastions_get(room_id):
+#     questions = []
+#     for username in rooms_data[room_id]["members"]:
+#         user = models.Account.query.filter_by(name=username).first()
+#         if user:
+#             print(user.id,flush=True)
+#             questionsets = models.Questionset.query.filter_by(questionsetowner=user.id).all()
+#             for questionset in questionsets:
+#                 print(questionset.questionsetid,flush=True)
+#                 questions_in_set = models.Question.query.filter_by(questionsetid=questionset.questionsetid).all()
+#                 for question in questions_in_set:
+#                     if(question not in questions):
+#                         questions.append(question)
+#                     print(question.questionid,flush=True)
+#     random.shuffle(questions)
+#     # questions = questions[:10]
+#     return questions
