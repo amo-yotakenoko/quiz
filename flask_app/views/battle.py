@@ -8,6 +8,7 @@ from flask_cors import CORS
 import uuid
 from flask_app.views.lobby import rooms_data
 import random
+import json
 battle_module = Blueprint("battle", __name__)
 
 @socketio.on('game_start')
@@ -31,14 +32,28 @@ def message(msg):
         rooms_data[room_id]["questionid"]=question.questionid
         rooms_data[room_id]["correct_order"]=0
         # socketio.emit('add_log', {'text': f"問題:{question.questiontext}"} ,room=room_id)
-        socketio.emit('question',question.questiontext ,room=room_id)
+        question_text = question.questiontext
+        answer_correct = question.answer
+        # 選択式問題なら選択肢も表示させる
+        if question.questionformat == 1:
+            answers_json = json.loads(question.answer)
+            choices = [answers_json[key] for key in ["choice_correct", "choice_incorrect1", "choice_incorrect2", "choice_incorrect3"]]
+            choice_map = [x for x in range(len(choices))]
+            rooms_data[room_id]["choice_map"] = choice_map
+            random.shuffle(choice_map)
+            for i in range(len(choices)):
+                choice = choice_map.index(i)
+                question_text += "<br>{}. {}".format(i + 1, choices[choice])
+            answer_correct = answers_json["choice_correct"]
+
+        socketio.emit('question', question_text, room=room_id)
         for i in range(10,0,-1):
             socketio.emit('timer', i ,room=room_id)
             socketio.sleep(1)
-        socketio.emit('add_log', {'text': f"答え:{question.answer}"} ,room=room_id)
+        socketio.emit('add_log', {'text': f"答え:{answer_correct}"} ,room=room_id)
         socketio.sleep(1)
-        socketio.emit('add_log', {'text': f"終わりです<a href=\"{ url_for('index.index_get') }\" >戻る</a>"} ,room=room_id)
-        rooms_data[room_id]["status"]="finish"
+    socketio.emit('add_log', {'text': f"終わりです<a href=\"{ url_for('index.index_get') }\" >戻る</a>"} ,room=room_id)
+    rooms_data[room_id]["status"]="finish"
     # socketio.emit('question',"おわり" ,room=room_id)
     print(url_for('lobby.room_get'),flush=True)
 
@@ -49,9 +64,12 @@ def message(msg):
     room_id=msg['room_id']
     username=msg['username']
     question=models.Question.query.filter(models.Question.questionid ==  rooms_data[f"{room_id}"]["questionid"]).first()
-
-
-    is_correct=msg['answer']==question.answer
+    
+    if question.questionformat == 0:
+        is_correct=msg['answer']==question.answer
+    else:
+        correct_choice = rooms_data[room_id]["choice_map"][0] + 1
+        is_correct = msg["answer"] == str(correct_choice)
     log='🙆‍♂️' if is_correct else '🙅'
     if( is_correct):
         rooms_data[room_id]["correct_order"]+=1
