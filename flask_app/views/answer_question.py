@@ -22,4 +22,15 @@ def answer():
     question=models.Question.query.filter(models.Question.questionid == request.json['questionid']).first()
     # print(jsonify(question))
     is_correct=request.json['answer']==question.answer
+    
+    if(question.correctcount is None):
+        question.correctcount=0
+    if(question.count is None):
+        question.count=0
+
+    question.count+=1
+
+    if(is_correct):
+        question.correctcount+=1
+    db.session.commit()
     return  {'questionid':question.questionid,'answer': question.answer,'is_correct':is_correct}

@@ -33,8 +33,8 @@ def questions_get(id):
 
 @questions_set_module.route("/questions_set/<id>",methods=['POST'])
 def questions_set(id):
-    #TODO:問題タイプここで選ぶ?
-    request_data = models.Question(questionsetid=id,questiontext="quiz")
+
+    request_data = models.Question(questionsetid=id,questiontext="quiz",count=0,correctcount=0)
     db.session.add(request_data)
     db.session.commit()
     #TODO:ここ直接行けるようにしたい

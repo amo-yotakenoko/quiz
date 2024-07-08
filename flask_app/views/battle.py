@@ -67,6 +67,17 @@ def message(msg):
         log+=f"+{addpoint}points"
         # socketio.emit('correct', "正解" )  
 
+    if(question.correctcount is None):
+        question.correctcount=0
+    if(question.count is None):
+        question.count=0
+
+    question.count+=1
+
+    if(is_correct):
+        question.correctcount+=1
+    db.session.commit()
+
     if(is_correct):
         msg['answer']="----"
     socketio.emit('post_answer', {'username':username,'answer':msg['answer'],'is_correct':is_correct},room=msg['room_id'])  
