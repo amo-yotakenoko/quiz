@@ -12,6 +12,8 @@
     <form method="POST">
         <input type="submit" value="問題を追加">
     </form>
+
+    <input type="text" id="questionsettitle" value="{{questionset.questionsetitle}}">
     <table>
         <tr>
             <th>questionid</th>
@@ -35,3 +37,27 @@
 </body>
 
 </html>
+
+<script>
+
+    const questionsetitle = document.getElementById("questionsettitle")
+    questionsetitle.addEventListener("change", function () {
+        console.log({ questionsetid: '{{ questionset.questionsetid }}', new_title: questionsetitle.value })
+        fetch('/questionsettitle_change', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ questionsetid: '{{ questionset.questionsetid }}', new_title: questionsetitle.value })
+        })
+        // .then(response => {
+        //     return response.json();
+        // })
+        // .then(json => {
+        //     console.log(json)
+        //     check_answer = document.getElementById(`answer_${questionid}`);
+        //     check_answer.innerHTML = `${json.is_correct}`
+        // })
+        // .catch(error => {
+        //     console.log(error.message);
+        // });
+    });
+</script>

@@ -26,10 +26,20 @@ def add_questionset():
 @questions_set_module.route("/questions_set/<id>",methods=['GET'])
 def questions_get(id):
     questions = models.Question.query.filter_by(questionsetid=id)
+    questionsset = models.Questionset.query.filter_by(questionsetid=id).one_or_none()
     # if  questions == None:
     #     return Response(response="<h1>404 Not found<h1/>", status=404)
-    return render_template('questions.html',questions=  questions)
+    return render_template('questions.html',questions=  questions,questionset=questionsset)
 
+
+@questions_set_module.route("/questionsettitle_change",methods=['POST'])
+def questionsettitle_change():
+    print( request.json['questionsetid'],request.json['new_title'],flush=True)
+    questionsset = models.Questionset.query.filter_by(questionsetid=request.json['questionsetid']).one_or_none()
+    questionsset.questionsetitle=request.json['new_title']
+    db.session.add(questionsset)
+    db.session.commit()
+    return "ok"
 
 @questions_set_module.route("/questions_set/<id>",methods=['POST'])
 def questions_set(id):
