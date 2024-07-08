@@ -108,7 +108,7 @@ def quastions_get(room_id):
                         questions.append(question)
                     print(question.questionid,flush=True)
     random.shuffle(questions)
-    questions = questions[:3]
+    questions = questions[:10]
     return questions
 
     
