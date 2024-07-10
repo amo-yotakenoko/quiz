@@ -12,7 +12,9 @@
     <form method="POST">
         <input type="submit" value="問題を追加">
     </form>
-
+    {% if can_delete %}
+    <button onclick="questionset_delete()">問題セットを削除</button>
+    {% endif %}
     <input type="text" id="questionsettitle" value="{{questionset.questionsetitle}}">
     <table>
         <tr>
@@ -50,4 +52,12 @@
         })
 
     });
+    function questionset_delete() {
+        fetch('/questionset_delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ questionsetid: '{{questionset.questionsetid}}' })
+        })
+        window.location.href = "{{ url_for('questions_set.questions_set_get') }}"
+    }
 </script>

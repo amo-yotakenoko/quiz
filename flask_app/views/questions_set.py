@@ -29,8 +29,17 @@ def questions_get(id):
     questionsset = models.Questionset.query.filter_by(questionsetid=id).one_or_none()
     # if  questions == None:
     #     return Response(response="<h1>404 Not found<h1/>", status=404)
-    return render_template('questions.html',questions=  questions,questionset=questionsset)
+    # 
+    return render_template('questions.html',questions=  questions,questionset=questionsset,can_delete=len(questions.all())==0)
 
+@questions_set_module.route("/questionset_delete",methods=['POST'])
+def question_delete():
+    print( request.json['questionsetid'],"削除",flush=True)
+    question = models.Questionset.query.filter_by(questionsetid=request.json['questionsetid']).one_or_none()
+
+    db.session.delete(question)
+    db.session.commit()
+    return redirect(url_for('questions_set.questions_get', id=question.questionsetid))
 
 @questions_set_module.route("/questionsettitle_change",methods=['POST'])
 def questionsettitle_change():
