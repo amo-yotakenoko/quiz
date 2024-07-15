@@ -30,7 +30,7 @@ def room_get(id):
         rooms_data[f"{room_id}"] = {"status": "waiting_to_join", "members": [],"question_set":[]}
         is_owner=True
 
-    questions_sets = questions_sets = models.Questionset.query.filter(or_( models.Questionset.questionsetowner ==current_user.get_id(), models.Questionset.questionsetowner == 0)).all()
+    questions_sets = questions_sets = models.Questionset.query.filter(or_( models.Questionset.questionsetowner ==current_user.get_id(), models.Questionset.questionsetowner == None)).all()
     return render_template('lobby.html',room_id=id,is_owner=is_owner,questions_sets= questions_sets)
 
 #クライアントとのコネクション確立

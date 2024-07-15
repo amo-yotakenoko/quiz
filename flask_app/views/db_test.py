@@ -9,77 +9,77 @@ db_test_module = Blueprint("db_test", __name__)
 @db_test_module.route('/add_test_quastion', methods=['GET'])
 def insart_testdata():
 
-    user1 = Questionset(questionsetitle="初級数学クイズ", questionsetowner=1)
+    user1 = Questionset(questionsetitle="ChatGPTに作らせた初級数学クイズ", questionsetowner=0)
     db.session.add(user1)
     db.session.commit()
 
     question1_user1 = Question(questionsetid=user1.questionsetid,
                                questiontext="2 + 2 = ?",
                                answer="4",
-                               questionformat=1)
+                               questionformat=0)
     db.session.add(question1_user1)
 
     question2_user1 = Question(questionsetid=user1.questionsetid,
                                questiontext="5 × 5 = ?",
                                answer="25",
-                               questionformat=1)
+                               questionformat=0)
     db.session.add(question2_user1)
 
     question3_user1 = Question(questionsetid=user1.questionsetid,
                                questiontext="10 ÷ 2 = ?",
                                answer="5",
-                               questionformat=1)
+                               questionformat=0)
     db.session.add(question3_user1)
 
     question4_user1 = Question(questionsetid=user1.questionsetid,
                                questiontext="3² = ?",
                                answer="9",
-                               questionformat=1)
+                               questionformat=0)
     db.session.add(question4_user1)
 
     question5_user1 = Question(questionsetid=user1.questionsetid,
                                questiontext="4 - 1 = ?",
                                answer="3",
-                               questionformat=1)
+                               questionformat=0)
     db.session.add(question5_user1)
 
     db.session.commit()
-    user1_2 = Questionset(questionsetitle="Pythonの基本クイズ", questionsetowner=1)
+    user1_2 = Questionset(questionsetitle="ChatGPTに作らせたPythonの基本クイズ", questionsetowner=0)
     db.session.add(user1_2)
     db.session.commit()
 
     question1_user1_2 = Question(questionsetid=user1_2.questionsetid,
                             questiontext="Pythonのコメントを記述する記号は何か？",
                             answer="#",
-                            questionformat=1)
+                            questionformat=0)
     db.session.add(question1_user1_2)
 
     question2_user1_2 = Question(questionsetid=user1_2.questionsetid,
                             questiontext="Pythonで文字列を結合する演算子は何か？",
                             answer="+",
-                            questionformat=1)
+                            questionformat=0)
     db.session.add(question2_user1_2)
 
     question3_user1_2 = Question(questionsetid=user1_2.questionsetid,
                             questiontext="Pythonで変数を代入する演算子は何か？",
                             answer="=",
-                            questionformat=1)
+                            questionformat=0)
     db.session.add(question3_user1_2)
 
     question4_user1_2 = Question(questionsetid=user1_2.questionsetid,
                             questiontext="Pythonで条件分岐を行うためのキーワードは何か？",
                             answer="if",
-                            questionformat=1)
+                            questionformat=0)
     db.session.add(question4_user1_2)
 
     question5_user1_2 = Question(questionsetid=user1_2.questionsetid,
                             questiontext="Pythonのリスト内包表記の記法はどうなっているか？",
                             answer="[式 for 要素 in イテラブル]",
-                            questionformat=1)
+                            questionformat=0)
     db.session.add(question5_user1_2)
 
     # ユーザー2のクイズセットとクイズの作成
-    user2 = Questionset(questionsetitle="動物の科学クイズ", questionsetowner=2)
+    user2 = Questionset(questionsetitle="ChatGPTに作らせた動物の科学クイズ", questionsetowner=0)
     db.session.add(user2)
     db.session.commit()
 
@@ -116,7 +116,7 @@ def insart_testdata():
     db.session.commit()
 
     # ユーザー3のクイズセットとクイズの作成
-    user3 = Questionset(questionsetitle="文学のクイズ", questionsetowner=3)
+    user3 = Questionset(questionsetitle="ChatGPTに作らせた文学のクイズ", questionsetowner=0)
     db.session.add(user3)
     db.session.commit()
 
