@@ -9,7 +9,7 @@ db_test_module = Blueprint("db_test", __name__)
 @db_test_module.route('/add_test_quastion', methods=['GET'])
 def insart_testdata():
 
-    user1 = Questionset(questionsetitle="ChatGPTに作らせた初級数学クイズ", questionsetowner=0)
+    user1 = Questionset(questionsetitle="ChatGPTに作らせた初級数学クイズ", questionsetowner=None)
     db.session.add(user1)
     db.session.commit()
 
@@ -44,7 +44,7 @@ def insart_testdata():
     db.session.add(question5_user1)
 
     db.session.commit()
-    user1_2 = Questionset(questionsetitle="ChatGPTに作らせたPythonの基本クイズ", questionsetowner=0)
+    user1_2 = Questionset(questionsetitle="ChatGPTに作らせたPythonの基本クイズ", questionsetowner=None)
     db.session.add(user1_2)
     db.session.commit()
 
@@ -79,7 +79,7 @@ def insart_testdata():
     db.session.add(question5_user1_2)
 
     # ユーザー2のクイズセットとクイズの作成
-    user2 = Questionset(questionsetitle="ChatGPTに作らせた動物の科学クイズ", questionsetowner=0)
+    user2 = Questionset(questionsetitle="ChatGPTに作らせた動物の科学クイズ", questionsetowner=None)
     db.session.add(user2)
     db.session.commit()
 
@@ -116,7 +116,7 @@ def insart_testdata():
     db.session.commit()
 
     # ユーザー3のクイズセットとクイズの作成
-    user3 = Questionset(questionsetitle="ChatGPTに作らせた文学のクイズ", questionsetowner=0)
+    user3 = Questionset(questionsetitle="ChatGPTに作らせた文学のクイズ", questionsetowner=None)
     db.session.add(user3)
     db.session.commit()
 

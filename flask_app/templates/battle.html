@@ -54,14 +54,17 @@
 
     socket.on('post_answer', function (data) {
         console.log('Received data:', data);
+        if (data.is_correct && '{{ current_user.name }}' != data.username) {
+            data.answer = "---"
+        }
+        document.getElementById('log').innerHTML += `${data.username}:${data.answer}:${data.is_correct ? '🙆‍♂️' : '🙅'}<br>`;
         if (data.is_correct && '{{ current_user.name }}' == data.username) {
             alert("正解!");
             document.getElementById("input_text").disabled = true;
             // data.answer = ""
-            document.getElementById('log').innerHTML += `${data.username}:${data.answer}:${data.is_correct ? '🙆‍♂️' : '🙅'}<br>`;
-        } else {
-            document.getElementById('log').innerHTML += `${data.username}:${data.is_correct ? '🙆‍♂️' : '🙅'}<br>`;
+
         }
+
     });
 
 

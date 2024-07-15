@@ -96,8 +96,8 @@ def message(msg):
         question.correctcount+=1
     db.session.commit()
 
-    if(is_correct):
-        msg['answer']="----"
+    # if(is_correct):
+    #     msg['answer']="----"
     socketio.emit('post_answer', {'username':username,'answer':msg['answer'],'is_correct':is_correct},room=msg['room_id'])  
 
 def update_ranking(room_id):
