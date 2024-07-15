@@ -64,7 +64,7 @@ def join(msg):
 @socketio.on('message')
 def message(msg):
     print(msg,flush=True)
-    socketio.emit('add_log', msg,room=msg['room_id'])  
+    socketio.emit('add_log',{ "text": f"{msg['username']}:aaa"},room=msg['room_id'])  
 
 @socketio.on('select_questionset')
 def select_questionset(msg):
@@ -75,11 +75,11 @@ def select_questionset(msg):
     print(question_set_id,enable,flush=True)
     if(enable):
         rooms_data[ room_id]["question_set"].append(question_set_id)
-        socketio.emit('add_log',{ "text": f"{ models.Questionset.query.filter_by(questionsetid=question_set_id).first().questionsetitle}が追加" },room=msg['room_id'])  
+        socketio.emit('add_log',{ "text": f"{msg['username']}:{ models.Questionset.query.filter_by(questionsetid=question_set_id).first().questionsetitle}が追加" },room=msg['room_id'])  
 
     else:
         rooms_data[ room_id]["question_set"].remove(question_set_id)
-        socketio.emit('add_log',{ "text": f"{ models.Questionset.query.filter_by(questionsetid=question_set_id).first().questionsetitle}が削除" },room=msg['room_id'])  
+        socketio.emit('add_log',{ "text": f"{msg['username']}:{ models.Questionset.query.filter_by(questionsetid=question_set_id).first().questionsetitle}が削除" },room=msg['room_id'])  
     # if()
 
     

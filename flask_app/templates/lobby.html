@@ -37,7 +37,7 @@
     let socket = io();
     function select_questionset(questionsetid) {
         console.log(document.getElementById(`switch_${questionsetid}`).checked)
-        socket.emit('select_questionset', { questionset: questionsetid, enable: document.getElementById(`switch_${questionsetid}`).checked, room_id: '{{room_id}}' });
+        socket.emit('select_questionset', { username: '{{ current_user.name }}', questionset: questionsetid, enable: document.getElementById(`switch_${questionsetid}`).checked, room_id: '{{room_id}}' });
     }
 
     socket.on('connect', function () {
