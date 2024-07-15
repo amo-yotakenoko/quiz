@@ -10,11 +10,12 @@ create_question_module = Blueprint("create_question", __name__)
 @create_question_module.route("/question/<id>",methods=['GET'])
 def create_question_get(id):
     question = models.Question.query.filter_by(questionid=id).one_or_none()
+    question_set_name = models.Questionset.query.filter_by(questionsetid=question.questionsetid).one_or_none().questionsetitle
     selection =None
     if(question.questionformat==1):
         selection = json.loads(question.answer)
 
-    return render_template('create_question.html', id=id,question=  question,selection=selection)
+    return render_template('create_question.html', id=id,question=  question,selection=selection,question_set_name=question_set_name)
 
 @create_question_module.route("/question_delete",methods=['POST'])
 def question_delete():
