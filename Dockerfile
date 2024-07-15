@@ -6,6 +6,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY flask_app ./flask_app
+COPY migrations ./migrations
+RUN flask --app flask_app db upgrade c8194b0a0911
 
 EXPOSE 5000
 
