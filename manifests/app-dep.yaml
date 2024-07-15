@@ -15,5 +15,5 @@ spec:
         app: quiz-app
     spec:
       containers:
-        - image: ghcr.io/amo-yotakenoko/quiz:c6f6903570ae96d255351d3409494a1b956692a1
+        - image: ghcr.io/amo-yotakenoko/quiz:471fcd9d3cca70b9c5e017ba16569188bc4c73a1
           name: quiz-app
