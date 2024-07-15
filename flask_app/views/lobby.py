@@ -64,7 +64,7 @@ def join(msg):
 @socketio.on('message')
 def message(msg):
     print(msg,flush=True)
-    socketio.emit('add_log',{ "text": f"{msg['username']}:aaa"},room=msg['room_id'])  
+    socketio.emit('add_log',{ "text": f"{msg['username']}:{msg['text']}"},room=msg['room_id'])  
 
 @socketio.on('select_questionset')
 def select_questionset(msg):
