@@ -43,10 +43,11 @@ def message(msg):
             random.shuffle(choice_map)
             for i in range(len(choices)):
                 choice = choice_map.index(i)
-                question_text += "<br>{}. {}".format(i + 1, choices[choice])
+                # question_text += "<br>{}. {}".format(i + 1, choices[choice])
+                question_text += f"<button onclick='choiceanswer(\"{choices[choice]}\")' name='choicebutton'>{choices[choice]}</button>"
             answer_correct = answers_json["choice_correct"]
 
-        socketio.emit('question', question_text, room=room_id)
+        socketio.emit('question', {'question_text':question_text,'questionforat':question.questionformat,'answer':question.answer}, room=room_id)
         for i in range(10,0,-1):
             socketio.emit('timer', i ,room=room_id)
             socketio.sleep(1)
@@ -64,12 +65,15 @@ def message(msg):
     room_id=msg['room_id']
     username=msg['username']
     question=models.Question.query.filter(models.Question.questionid ==  rooms_data[f"{room_id}"]["questionid"]).first()
-    
+    is_correct=msg['answer']==question.answer
+    print(f"{is_correct},{msg['answer']},{question.answer}",flush=True)
     if question.questionformat == 0:
         is_correct=msg['answer']==question.answer
-    else:
-        correct_choice = rooms_data[room_id]["choice_map"][0] + 1
-        is_correct = msg["answer"] == str(correct_choice)
+    if question.questionformat == 1:
+        is_correct=msg['answer']==json.loads(question.answer)["choice_correct"]
+    # else:
+    #     correct_choice = rooms_data[room_id]["choice_map"][0] + 1
+    #     is_correct = msg["answer"] == str(correct_choice)
     log='🙆‍♂️' if is_correct else '🙅'
     if( is_correct):
         rooms_data[room_id]["correct_order"]+=1

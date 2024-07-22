@@ -22,6 +22,10 @@
 残り<div id="timer"></div>秒
 
 <input type="text" id="input_text" required>
+
+<div id="choice">選択式</div>
+
+
 <!-- <div id=""> -->
 <br>
 
@@ -43,6 +47,9 @@
         socket.emit('send_answer', { username: '{{ current_user.name }}', answer: input_text.value, room_id: '{{room_id}}' });
         input_text.value = ""
     });
+    function choiceanswer(a) {
+        socket.emit('send_answer', { username: '{{ current_user.name }}', answer: a, room_id: '{{room_id}}' });
+    }
 
     socket.on('client_echo', function (data) {
         console.log("echo" + ': ' + data.msg);
@@ -61,6 +68,9 @@
         if (data.is_correct && '{{ current_user.name }}' == data.username) {
             alert("正解!");
             document.getElementById("input_text").disabled = true;
+            document.getElementsByName('choicebutton').forEach(function (element) {
+                element.disabled = true;
+            });
             // data.answer = ""
 
         }
@@ -71,12 +81,22 @@
     socket.on('question', function (data) {
         console.log(data)
         document.getElementById('log').innerHTML = ``;
-        document.getElementById("question").innerHTML = `${data} <br> `;
+        document.getElementById("question").innerHTML = `${data.question_text} <br> `;
+        if (data.questionforat == 0) {
+            document.getElementById("input_text").style.display = "block";
+            document.getElementById("choice").style.display = "none";
+        }
+        if (data.questionforat == 1) {
+            document.getElementById("input_text").style.display = "none";
+            document.getElementById("choice").style.display = "block";
+
+            // document.getElementById("b1").value = data
+        }
         document.getElementById("input_text").disabled = false;
     });
 
     socket.on('timer', function (data) {
-        console.log(data)
+        // console.log(data)
         document.getElementById('timer').innerHTML = data;
 
     });
