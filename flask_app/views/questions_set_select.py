@@ -11,8 +11,7 @@ questions_set_select_module = Blueprint("questions_set_select", __name__)
 @questions_set_select_module.route("/questions_set_select",methods=['GET'])
 def questions_set_select_get():
     #TODO:所有者でフィルタする
-    questions_sets = models.Questionset.query.all()
-    # .filter(or_( models.Questionset.questionsetowner ==current_user.get_id(), models.Questionset.questionsetowner == 0))
+    questions_sets = models.Questionset.query.filter(or_( models.Questionset.questionsetowner ==current_user.get_id(), models.Questionset.questionsetowner == None))
     return render_template('questions_set_select.html',questions_sets= questions_sets)
 
 

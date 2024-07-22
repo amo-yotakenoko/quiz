@@ -30,7 +30,8 @@
                 </a></td>
             <td>{{question.questionsetid}}</td>
             <td>{{question.questiontext}}</td>
-            <td>{{ question.correctcount }}/{{ question.count }}</td>
+            <td>{{ question.correctcount }}/{{ question.count }}({{'{:.0f}'.format( question.correctcount /
+                question.count*100) }}%)</td>
 
         </tr>
         {% endfor %}
